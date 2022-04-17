@@ -1,5 +1,7 @@
 # FlameyTV
 
+Build with NuxtJS and Supabase
+
 ## Build Setup
 
 ```bash
