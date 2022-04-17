@@ -1,6 +1,6 @@
 # FlameyTV
 
-Build with NuxtJS and Supabase
+Build with NuxtJS and TMDB
 
 ## Build Setup
 
