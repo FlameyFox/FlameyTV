@@ -1,6 +1,6 @@
 # FlameyTV
 
-Build with NuxtJS and TMDB
+Build with NuxtJS and using [TMDB api](https://themoviedb.org).
 
 ## Build Setup
 

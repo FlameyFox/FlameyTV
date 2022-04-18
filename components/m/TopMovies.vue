@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="max-w-screen-2xl m-auto">
     <h2>Top Movies</h2>
     <div v-if="loading">Loading...</div>
-    <div v-else>
+    <div v-else class="grid grid-cols-6 gap-4">
       <MMovie :movie="movie" v-for="movie in movies" :key="movie.id" />
     </div>
   </div>
