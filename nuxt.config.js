@@ -27,7 +27,10 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxt/postcss8',
   ],
+
+  css: ['@/assets/css/main.css'],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -52,5 +55,12 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
+  },
 }
