@@ -8,6 +8,7 @@
   </div>
 </template>
 <script>
+const api = process.env.TMDB_API
 export default {
   data() {
     return {
@@ -17,9 +18,11 @@ export default {
   },
   async created() {
     this.loading = true
-    const movies = await this.$axios.$get(
-      'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=26166d6d6e294abfd423ab032242cfbd'
-    )
+    const url =
+      'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=' +
+      api
+    console.log(url)
+    const movies = await this.$axios.$get(url)
     this.movies = movies.results
     this.loading = false
   },
