@@ -13,7 +13,7 @@
           <nuxt-link to="#">Top 100</nuxt-link>
         </li>
         <li class="list-none px-2">
-          <nuxt-link to="#">About</nuxt-link>
+          <nuxt-link to="/search">Search</nuxt-link>
         </li>
       </nav>
     </header>
