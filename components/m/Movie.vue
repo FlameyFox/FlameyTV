@@ -1,12 +1,12 @@
 <template>
   <div class="...">
     <div>
-      <h3>{{ movie.original_title }}</h3>
+      <h3>{{ movie.title }}</h3>
       <nuxt-link :to="'/m/' + movie.id">
         <img
           v-if="movie.poster_path"
           :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-          :alt="movie.original_title"
+          :alt="movie.title"
         />
         <img
           class="bg-white"
@@ -20,8 +20,8 @@
         <aside>
           {{ movie.release_date }}
         </aside>
-        <aside class="bg-slate-900 rounded-md p-1">
-          {{ movie.vote_average }}
+        <aside class="bg-slate-900 rounded-md p-1 text-center movie-score">
+          {{ movie.vote_average.toFixed(1) }}
         </aside>
       </div>
     </div>

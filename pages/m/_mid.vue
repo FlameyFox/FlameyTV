@@ -1,10 +1,20 @@
 <template>
   <div>
-    <div v-if="loading">
-      Loading...
-    </div>
+    <div v-if="loading">Loading...</div>
     <div v-else>
-      <h1>{{ movie.original_title }}</h1>
+      <img
+        v-if="movie.poster_path"
+        :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+        :alt="movie.title"
+        class="w-60"
+      />
+      <img
+        class="bg-white w-60"
+        v-else
+        src="@/assets/img/noPoster.svg"
+        alt="No Poster"
+      />
+      <h1>{{ movie.title }}</h1>
     </div>
   </div>
 </template>
