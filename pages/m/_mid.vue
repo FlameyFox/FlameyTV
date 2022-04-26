@@ -11,7 +11,7 @@
       <img
         class="bg-white w-60"
         v-else
-        src="@/assets/img/noPoster.svg"
+        src="@/assets/img/noPoster.png"
         alt="No Poster"
       />
       <h1>{{ movie.title }}</h1>

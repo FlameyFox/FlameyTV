@@ -46,14 +46,6 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
-    [
-      'nuxt-supabase',
-      {
-        supabaseUrl: 'https://umtumtssikeynmwjeecj.supabase.co',
-        supabaseKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtdHVtdHNzaWtleW5td2plZWNqIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTAyMDgxNjAsImV4cCI6MTk2NTc4NDE2MH0.wBNERAvsP0uQuCzsNQU8vAevqXBKByFipqTl8AFz4ko',
-      },
-    ],
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
