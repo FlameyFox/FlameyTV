@@ -11,7 +11,7 @@
         <img
           class="bg-white"
           v-else
-          src="@/assets/img/noPoster.svg"
+          src="@/assets/img/noPoster.png"
           alt="No Poster"
         />
       </nuxt-link>

@@ -1,6 +1,8 @@
 <template>
   <div>
     <UITheHeader />
-    <Nuxt />
+    <section class="bg-slate-800 min-h-screen text-slate-200">
+      <Nuxt />
+    </section>
   </div>
 </template>
