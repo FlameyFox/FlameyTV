@@ -1,8 +1,7 @@
 <template>
   <div class="...">
-    <div>
-      <h3>{{ movie.title }}</h3>
-      <nuxt-link :to="'/m/' + movie.id">
+    <div class="movie overflow-hidden">
+      <nuxt-link :to="'/m/' + movie.id" class="block relative">
         <img
           v-if="movie.poster_path"
           :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
@@ -14,16 +13,16 @@
           src="@/assets/img/noPoster.png"
           alt="No Poster"
         />
+        <div class="details w-full flex h-full items-end justify-between p-2 absolute bottom-0">
+          <aside>
+            <h3>{{ movie.title }}</h3>
+            {{ movie.release_date }}
+          </aside>
+          <aside class="rounded-md p-1 text-center movie-score">
+            {{ movie.vote_average.toFixed(1) }}
+          </aside>
+        </div>
       </nuxt-link>
-      <!-- TODO: Add fallback image -->
-      <div class="details flex justify-between mt-1">
-        <aside>
-          {{ movie.release_date }}
-        </aside>
-        <aside class="bg-slate-900 rounded-md p-1 text-center movie-score">
-          {{ movie.vote_average.toFixed(1) }}
-        </aside>
-      </div>
     </div>
   </div>
 </template>
@@ -33,3 +32,18 @@ export default {
   props: ['movie'],
 }
 </script>
+
+<style scoped>
+.details {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, .95) 10%,
+    rgba(255, 255, 255, .01) 100%
+  );
+  transition: all .3s ease-in-out;
+  opacity: 0;
+}
+.movie:hover .details{
+  opacity: 1;
+}
+</style>
