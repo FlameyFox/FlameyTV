@@ -11,11 +11,11 @@
       </div>
     </div>
     <div v-else>
-      <div v-if="!showMore" class="grid grid-cols-6 gap-6">
+      <div v-if="currentMoviePage < 3" class="grid grid-cols-6 gap-6">
         <MMovie
           :movie="movie"
           :loading="loading"
-          v-for="movie in movies.slice(0, 6)"
+          v-for="movie in movies.slice(0, 12)"
           :key="movie.id"
         />
       </div>
@@ -23,17 +23,16 @@
         <MMovie
           :movie="movie"
           :loading="loading"
-          v-for="movie in movies.slice(0, 18)"
+          v-for="movie in movies"
           :key="movie.id"
         />
       </div>
     </div>
     <button
-      v-if="!showMore"
       class="p-2 rounded-md text-center bg-slate-900 mt-6 mx-auto block"
-      @click="showMore = true"
+      @click="getMoreMovies(currentMoviePage)"
     >
-      Show more
+      {{ loadingMoreMovies ? 'Fetching more movies...' : 'Load more' }}
     </button>
   </div>
 </template>
@@ -44,7 +43,8 @@ export default {
     return {
       movies: null,
       loading: false,
-      showMore: false,
+      loadingMoreMovies: false,
+      currentMoviePage: 2,
     }
   },
   async created() {
@@ -55,6 +55,27 @@ export default {
     const movies = await this.$axios.$get(url)
     this.movies = movies.results
     this.loading = false
+  },
+
+  methods: {
+    async getMoreMovies(pageId) {
+      this.loadingMoreMovies = true
+      const url =
+        'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&&vote_count.gte=250&api_key=' +
+        api +
+        '&page=' +
+        pageId
+      const movies = await this.$axios.$get(url)
+      console.log(movies.results)
+      this.currentMoviePage++
+
+      movies.results.forEach(v => {
+        this.movies.push(v)
+      });
+
+      console.log(this.movies)
+      this.loadingMoreMovies = false
+    },
   },
 }
 </script>
