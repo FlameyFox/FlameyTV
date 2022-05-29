@@ -22,6 +22,13 @@
           <p>Revenue: {{ movie.revenue }}</p>
           <p>IMDB id: {{ movie.imdb_id }}</p>
           <p>Description: {{ movie.overview }}</p>
+          <p>Cast: {{ mCredits }}</p>
+
+          <div class="flex flex-wrap">
+            <span v-for="member in cast" :key="member" class="inline-block mx-2"
+              >{{ member.original_name }} as {{ member.character }}</span
+            >
+          </div>
 
           <!-- TODO: Get actor info -->
         </div>
@@ -41,6 +48,7 @@ export default {
       backdropImgPath: {
         backgroundImage: '',
       },
+      cast: [],
     }
   },
   async created() {
@@ -56,7 +64,23 @@ export default {
       'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' +
       movie.backdrop_path +
       ')'
+
+    this.getMovieCredits(this.$route.params.mid)
     this.loading = false
+  },
+
+  methods: {
+    async getMovieCredits(movieID) {
+      this.loading = true
+      const url =
+        'https://api.themoviedb.org/3/movie/' +
+        movieID +
+        '/credits?api_key=' +
+        api
+      const credits = await this.$axios.$get(url)
+      this.cast = credits.cast
+      this.loading = false
+    },
   },
 }
 </script>
