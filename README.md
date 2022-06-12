@@ -1,6 +1,6 @@
 # FlameyTV
 
-Build with NuxtJS and using [TMDB api](https://themoviedb.org).
+Build with NuxtJS, TailwindCSS and using [TMDB api](https://themoviedb.org).
 
 ```bash
 # make a .env file and insert your API key like this:
