@@ -10,7 +10,7 @@
           <nuxt-link to="#">Newest</nuxt-link>
         </li>
         <li class="list-none px-2">
-          <nuxt-link to="#">Top 100</nuxt-link>
+          <nuxt-link to="/100">Top 100</nuxt-link>
         </li>
         <li class="list-none px-2">
           <nuxt-link to="/search">Search</nuxt-link>

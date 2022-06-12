@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-screen-2xl m-auto py-6">
-    <h2 class="text-4xl font-black mb-2">Most popular Movies</h2>
+    <h2 class="text-4xl font-black mb-2">Top 100 Movies</h2>
     <div v-if="loading">
       <div class="grid grid-cols-6 gap-6">
         <div
@@ -15,7 +15,7 @@
         <MMovie
           :movie="movie"
           :loading="loading"
-          v-for="movie in movies.slice(0, 12)"
+          v-for="movie in movies.slice(0, 18)"
           :key="movie.id"
         />
       </div>
@@ -50,7 +50,7 @@ export default {
   async created() {
     this.loading = true
     const url =
-      'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&&vote_count.gte=250&api_key=' +
+      'https://api.themoviedb.org/3/movie/top_rated?api_key=' +
       api
     const movies = await this.$axios.$get(url)
     this.movies = movies.results
@@ -61,7 +61,7 @@ export default {
     async getMoreMovies(pageId) {
       this.loadingMoreMovies = true
       const url =
-        'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&&vote_count.gte=250&api_key=' +
+        'https://api.themoviedb.org/3/movie/top_rated?api_key=' +
         api +
         '&page=' +
         pageId

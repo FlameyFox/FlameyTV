@@ -1,31 +1,37 @@
 <template>
-    <div class="max-w-screen-2xl m-auto py-6">
-      <h2 class="text-4xl font-black">Search movies</h2>
-      <div>
-        <input type="text" v-model="query" placeholder="Search..." />
-      </div>
-      <div class="results">
-        <div v-if="loading">
-          <div class="grid grid-cols-6 gap-6">
-            <div
-              class="bg-slate-700 shadow rounded-md p-4 max-w-sm w-full mx-auto animate-pulse"
-              v-for="num in 6"
-              :key="num"
-            ></div>
-          </div>
+  <div class="max-w-screen-2xl m-auto py-6">
+    <div class="flex justify-center flex-col items-center">
+      <h2 class="text-4xl font-black text-center">Search movies</h2>
+      <input
+        class="bg-slate-900 mt-4 text-white p-2 rounded-lg text-center w-1/3"
+        type="text"
+        v-model="query"
+        placeholder="Search..."
+      />
+    </div>
+
+    <div class="results mt-6">
+      <div v-if="loading">
+        <div class="grid grid-cols-6 gap-6">
+          <div
+            class="bg-slate-700 shadow rounded-md p-4 max-w-sm w-full mx-auto animate-pulse"
+            v-for="num in 6"
+            :key="num"
+          ></div>
         </div>
-        <div v-else-if="movies">
-          <div class="grid grid-cols-6 gap-6">
-            <MMovie
-              :movie="movie"
-              :loading="loading"
-              v-for="movie in movies.slice(0, 18)"
-              :key="movie.id"
-            />
-          </div>
+      </div>
+      <div v-else-if="movies">
+        <div class="grid grid-cols-6 gap-6">
+          <MMovie
+            :movie="movie"
+            :loading="loading"
+            v-for="movie in movies.slice(0, 18)"
+            :key="movie.id"
+          />
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
