@@ -1,7 +1,9 @@
 <template>
   <div>
     <header class="bg-slate-900 text-slate-200 flex p-6">
-      <div class="logo w-1/3">LOGO</div>
+      <nuxt-link class="w-1/3" to="/"
+        ><div class="font-black text-lg tracking-wider">FLAMEY TV</div></nuxt-link
+      >
       <nav class="flex w-1/3 justify-center">
         <li class="list-none px-2">
           <nuxt-link to="/">Home</nuxt-link>
