@@ -25,12 +25,18 @@
           <p>Cast: {{ mCredits }}</p>
 
           <div class="flex flex-wrap">
-            <span v-for="member in cast" :key="member" class="inline-block mx-2"
-              >{{ member.original_name }} as {{ member.character }}</span
+            <span
+              v-for="member in cast"
+              :key="member.id"
+              class="inline-block mx-1"
+              ><nuxt-link :to="'/actor/' + member.id">{{
+                member.original_name
+              }}</nuxt-link>
+              as {{ member.character }},</span
             >
           </div>
 
-          <!-- TODO: Get actor info -->
+          <!-- TODO: Make actor info prettier -->
         </div>
       </div>
     </div>
