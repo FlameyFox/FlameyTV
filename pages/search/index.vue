@@ -55,6 +55,8 @@ export default {
   methods: {
     async search() {
       this.loading = true
+
+      // ADD MULTI SEARCH WITH /multi instead TODO:
       const url =
         'https://api.themoviedb.org/3/search/movie?query=' +
         this.query +
