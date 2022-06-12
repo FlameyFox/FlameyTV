@@ -2,7 +2,10 @@
 
 Build with NuxtJS and using [TMDB api](https://themoviedb.org).
 
-`Make a .env file and insert your API key like this: _TMDB_API = "XXXXX"_`
+```bash
+# make a .env file and insert your API key like this:
+TMDB_API = "XXXXX"
+```
 
 ## Build Setup
 
