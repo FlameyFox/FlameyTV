@@ -3,7 +3,7 @@
     <div class="flex justify-center flex-col items-center">
       <h2 class="text-4xl font-black text-center">Search movies</h2>
       <input
-        class="bg-slate-900 mt-4 text-white p-2 rounded-lg text-center w-1/3"
+        class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
         type="text"
         v-model="query"
         placeholder="Search..."
