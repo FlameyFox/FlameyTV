@@ -13,13 +13,15 @@
           src="@/assets/img/noPoster.png"
           alt="No Poster"
         />
-        <div class="details w-full flex h-full items-end justify-between p-2 absolute bottom-0">
+        <div
+          class="details w-full flex h-full items-end justify-between p-2 absolute bottom-0"
+        >
           <aside>
             <h3>{{ movie.title }}</h3>
             {{ movie.release_date }}
           </aside>
           <aside class="rounded-md p-1 text-center movie-score">
-            {{ movie.vote_average.toFixed(1) }}
+            {{ movie.vote_average ? movie.vote_average.toFixed(1) : '0' }}
           </aside>
         </div>
       </nuxt-link>
@@ -37,13 +39,13 @@ export default {
 .details {
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, .95) 10%,
-    rgba(255, 255, 255, .01) 100%
+    rgba(0, 0, 0, 0.95) 10%,
+    rgba(255, 255, 255, 0.01) 100%
   );
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   opacity: 0;
 }
-.movie:hover .details{
+.movie:hover .details {
   opacity: 1;
 }
 </style>

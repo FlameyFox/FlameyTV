@@ -20,14 +20,20 @@
           ></div>
         </div>
       </div>
-      <div v-else-if="movies">
+      <div v-else-if="movies && movies.length > 1">
         <div class="grid grid-cols-6 gap-6">
+          <!-- TODO: CHECK WHAT MOVIE TYPE IT IS -->
           <MMovie
             :movie="movie"
             :loading="loading"
             v-for="movie in movies.slice(0, 18)"
             :key="movie.id"
           />
+        </div>
+      </div>
+      <div v-else-if="query && query.length > 2">
+        <div class="grid grid-cols-6 gap-6">
+          <p>No results...</p>
         </div>
       </div>
     </div>
@@ -56,9 +62,8 @@ export default {
     async search() {
       this.loading = true
 
-      // ADD MULTI SEARCH WITH /multi instead TODO:
       const url =
-        'https://api.themoviedb.org/3/search/movie?query=' +
+        'https://api.themoviedb.org/3/search/multi?query=' +
         this.query +
         '&api_key=' +
         api
