@@ -1,7 +1,9 @@
 <template>
   <div class="max-w-screen-2xl m-auto py-6">
     <div class="flex justify-center flex-col items-center">
-      <h2 class="text-4xl font-black text-center">Search movies, TV shows and more..</h2>
+      <h2 class="text-4xl font-black text-center">
+        Search movies, TV shows and more..
+      </h2>
       <input
         class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
         type="text"
@@ -61,12 +63,12 @@ export default {
   methods: {
     async search() {
       this.loading = true
-
-      const url =
+      var url =
         'https://api.themoviedb.org/3/search/multi?query=' +
         this.query +
         '&api_key=' +
         api
+
       const results = await this.$axios.$get(url)
       this.movies = results.results
       console.log(this.movies)
