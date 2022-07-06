@@ -10,6 +10,8 @@
         v-model="query"
         placeholder="Search..."
       />
+      <label for="adult">Enable Adult</label>
+      <input v-model="adult" name="adult" type="checkbox" id="adult">
     </div>
 
     <div class="results mt-6">
@@ -51,6 +53,7 @@ export default {
       loading: false,
       showMore: false,
       query: null,
+      adult: false,
     }
   },
   watch: {
@@ -64,10 +67,13 @@ export default {
     async search() {
       this.loading = true
       var url =
-        'https://api.themoviedb.org/3/search/multi?query=' +
-        this.query +
-        '&api_key=' +
-        api
+          'https://api.themoviedb.org/3/search/multi?query=' +
+          this.query +
+          '&api_key=' +
+          api
+      if (this.adult) {
+        url += '&include_adult=true';
+      }
 
       const results = await this.$axios.$get(url)
       this.movies = results.results
