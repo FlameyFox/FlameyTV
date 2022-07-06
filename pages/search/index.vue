@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-screen-2xl m-auto py-6">
     <div class="flex justify-center flex-col items-center">
-      <h2 class="text-4xl font-black text-center">Search movies</h2>
+      <h2 class="text-4xl font-black text-center">Search movies, TV shows and more..</h2>
       <input
         class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
         type="text"

@@ -52,6 +52,28 @@
         </div>
       </nuxt-link>
     </div>
+    <div v-if="movie.media_type === 'person'" class="movie overflow-hidden">
+      <nuxt-link :to="'/actor/' + movie.id" class="block relative">
+        <img
+          v-if="movie.profile_path"
+          :src="'https://image.tmdb.org/t/p/w500/' + movie.profile_path"
+          :alt="movie.name"
+        />
+        <img
+          class="bg-white"
+          v-else
+          src="@/assets/img/noPoster.png"
+          alt="No Poster"
+        />
+        <div
+          class="details w-full flex h-full items-end justify-between p-2 absolute bottom-0"
+        >
+          <aside>
+            <h3>{{ movie.name }}</h3>
+          </aside>
+        </div>
+      </nuxt-link>
+    </div>
   </div>
   <div v-else class="...">
     <div class="movie overflow-hidden">
