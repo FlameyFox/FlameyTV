@@ -4,12 +4,21 @@
       <h2 class="text-4xl font-black text-center">
         Search movies, TV shows and more..
       </h2>
-      <label for="adult">Enable Adult</label>
-      <input class="bg-slate-900 border-4 border-slate-900 checked:bg-blue-400 appearance-none text-white p-1  rounded-sm transition-all text-center" v-model="adult" name="adult" type="checkbox" id="adult">
+      <div class="d-flex gap-2">
+        <input
+          class="bg-slate-900 mb-1 align-middle border-4 d-inline border-slate-900 checked:bg-blue-400 appearance-none text-white p-1 rounded-sm transition-all text-center"
+          v-model="adult"
+          name="adult"
+          type="checkbox"
+          id="adult"
+        />
+        <label class="d-inline-block" for="adult">Enable Adult</label>
+      </div>
       <input
         class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
         type="text"
-        v-model="query"s
+        v-model="query"
+        s
         placeholder="Search..."
       />
     </div>
@@ -67,12 +76,12 @@ export default {
     async search() {
       this.loading = true
       var url =
-          'https://api.themoviedb.org/3/search/multi?query=' +
-          this.query +
-          '&api_key=' +
-          api
+        'https://api.themoviedb.org/3/search/multi?query=' +
+        this.query +
+        '&api_key=' +
+        api
       if (this.adult) {
-        url += '&include_adult=true';
+        url += '&include_adult=true'
       }
 
       const results = await this.$axios.$get(url)
