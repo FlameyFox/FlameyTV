@@ -4,14 +4,14 @@
       <h2 class="text-4xl font-black text-center">
         Search movies, TV shows and more..
       </h2>
+      <label for="adult">Enable Adult</label>
+      <input class="bg-slate-900 border-4 border-slate-900 checked:bg-blue-400 appearance-none text-white p-1  rounded-sm transition-all text-center" v-model="adult" name="adult" type="checkbox" id="adult">
       <input
         class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
         type="text"
-        v-model="query"
+        v-model="query"s
         placeholder="Search..."
       />
-      <label for="adult">Enable Adult</label>
-      <input v-model="adult" name="adult" type="checkbox" id="adult">
     </div>
 
     <div class="results mt-6">
