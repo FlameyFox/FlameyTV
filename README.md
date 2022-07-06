@@ -2,10 +2,14 @@
 
 Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 
-```bash
-# make a .env file and insert your API key like this:
-TMDB_API = "XXXXX"
-```
+
+TODO:
+
+- Migrate to Nuxt3
+- Deploy to Vercel to showcase demo
+
+
+
 
 ## Build Setup
 
@@ -26,3 +30,9 @@ $ yarn generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+
+### To enable the API
+```bash
+# make a .env file and insert your API key like this:
+TMDB_API = "XXXXX"
+```
