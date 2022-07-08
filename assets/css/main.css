@@ -9,11 +9,10 @@
 }
 .scrollbar {
   scrollbar-color: rgb(51, 65, 85) rgb(15, 23, 42);
-  scrollbar-width: thin;
 }
 
 .scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 15px;
 }
 .scrollbar::-webkit-scrollbar-track {
   background: rgb(15, 23, 42);

@@ -12,7 +12,7 @@
           type="checkbox"
           id="adult"
         />
-        <label class="d-inline-block" for="adult">Enable Adult</label>
+        <label class="d-inline-block" for="adult">Enable Adult (18+)</label>
       </div>
       <input
         class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"

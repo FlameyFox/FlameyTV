@@ -11,7 +11,7 @@
         <div
           class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
-          <div class="w-80">
+          <div class="w-1/3">
             <img
               v-if="movie.poster_path"
               :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
@@ -25,27 +25,38 @@
               alt="No Poster"
             />
 
-            <div class="bg-slate-800 rounded-lg p-5 w-80 mt-6">
+            <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3>Stats</h3>
               <p>Rating: {{ movie.vote_average }}</p>
               <p>Budget: {{ movie.budget }}</p>
               <p>Revenue: {{ movie.revenue }}</p>
               <p>IMDB id: {{ movie.imdb_id }}</p>
             </div>
+          </div>
+          <div class="w-2/3">
+            <div class="flex gap-6">
+              <div class="bg-slate-800 rounded-lg p-5">
+                <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
+                <h4 class="text-xl italic mb-4">{{ movie.tagline }}</h4>
+                <hr class="border-slate-900 border-opacity-50 mb-4" />
+                <p>{{ movie.overview }}</p>
+              </div>
+            </div>
+
             <div
-              class="bg-slate-800 rounded-lg p-5 scrollbar w-80 mt-6 max-h-screen overflow-y-scroll"
+              class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
             >
               <h3 class="mb-4 text-lg font-bold">Cast</h3>
               <div>
-                <div class="flex flex-col">
+                <div class="flex gap-3 min-w-fit">
                   <div
                     v-for="member in cast.slice(0, 12)"
                     :key="member.id"
-                    class="mb-3"
+                    class="w-36"
                   >
                     <nuxt-link
                       :to="'/actor/' + member.id"
-                      class="flex gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
+                      class="flex flex-col gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
                     >
                       <img
                         :src="
@@ -53,11 +64,11 @@
                           member.profile_path
                         "
                         :alt="member.original_name"
-                        class="w-20 h-20 rounded-md"
+                        class="w-32 h-32 rounded-md"
                         v-if="member.profile_path"
                       />
                       <img
-                        class="bg-slate-900 w-20 h-20 object-cover rounded-md"
+                        class="bg-slate-900 w-32 h-32 object-cover rounded-md"
                         v-else
                         src="@/assets/img/noPoster.png"
                         alt="No Profile Image"
@@ -72,21 +83,21 @@
                     </nuxt-link>
                   </div>
                   <button
-                    class="bg-slate-900 rounded-lg p-2 w-1/2 mx-auto transition-all hover:bg-opacity-75"
+                    class="bg-slate-900 w-36 rounded-lg px-2 py-6 mr-4 my-auto transition-all hover:bg-opacity-75"
                     v-if="!seeAllActors"
                     @click="seeAllActors = true"
                   >
                     See all actors
                   </button>
-                  <div v-if="seeAllActors">
+                  <div v-if="seeAllActors" class="flex gap-3 min-w-fit">
                     <div
                       v-for="member in cast.slice(12, 999)"
                       :key="member.id"
-                      class="mb-3"
+                      class="w-36"
                     >
                       <nuxt-link
                         :to="'/actor/' + member.id"
-                        class="flex gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
+                        class="flex flex-col gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
                       >
                         <img
                           :src="
@@ -94,11 +105,11 @@
                             member.profile_path
                           "
                           :alt="member.original_name"
-                          class="w-20 h-20 rounded-md"
+                          class="w-32 h-32 rounded-md"
                           v-if="member.profile_path"
                         />
                         <img
-                          class="bg-slate-900 w-20 h-20 object-cover rounded-md"
+                          class="bg-slate-900 w-32 h-32 object-cover rounded-md"
                           v-else
                           src="@/assets/img/noPoster.png"
                           alt="No Profile Image"
@@ -114,16 +125,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="flex gap-6">
-              <div class="bg-slate-800 rounded-lg p-5">
-                <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
-                <h4 class="text-xl italic mb-4">{{ movie.tagline }}</h4>
-                <hr class="border-slate-900 border-opacity-50 mb-4" />
-                <p>{{ movie.overview }}</p>
               </div>
             </div>
           </div>
