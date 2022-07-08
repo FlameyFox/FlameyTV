@@ -2,26 +2,44 @@
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else>
-      <div class="movie" :style="backdropImgPath">
-        <div class="details p-8">
-          <img
-            v-if="movie.poster_path"
-            :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-            :alt="movie.title"
-            class="w-60"
-          />
-          <img
-            class="bg-white w-60"
-            v-else
-            src="@/assets/img/noPoster.png"
-            alt="No Poster"
-          />
-          <h1>{{ movie.title }}</h1>
-          <p>Rating: {{ movie.vote_average }}</p>
-          <p>Budget: {{ movie.budget }}</p>
-          <p>Revenue: {{ movie.revenue }}</p>
-          <p>IMDB id: {{ movie.imdb_id }}</p>
-          <p>Description: {{ movie.overview }}</p>
+      <div class="movie pb-5">
+        <!-- TODO: MAKE ALT BANNER PICTURE -->
+        <div
+          class="banner bg-cover bg-no-repeat bg-center relative h-96"
+          :style="backdropImgPath"
+        ></div>
+        <div
+          class="details w-2/3 mx-auto p-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
+        >
+          <div class="flex gap-6">
+            <img
+              v-if="movie.poster_path"
+              :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+              :alt="movie.title"
+              class="w-72 rounded-md"
+            />
+            <img
+              class="bg-slate-900 w-72 rounded-md"
+              v-else
+              src="@/assets/img/noPoster.png"
+              alt="No Poster"
+            />
+            <div>
+              <div class="bg-slate-800 rounded-lg p-5">
+                <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
+                <h4 class="text-xl italic mb-4">{{ movie.tagline }}</h4>
+                <hr class="border-slate-800 mb-4" />
+                <p>{{ movie.overview }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-slate-800 rounded-lg p-5 w-72 mt-6">
+            <h3>Stats</h3>
+            <p>Rating: {{ movie.vote_average }}</p>
+            <p>Budget: {{ movie.budget }}</p>
+            <p>Revenue: {{ movie.revenue }}</p>
+            <p>IMDB id: {{ movie.imdb_id }}</p>
+          </div>
           <p>Cast: {{ mCredits }}</p>
 
           <div class="flex flex-wrap">
@@ -92,7 +110,13 @@ export default {
 </script>
 
 <style scoped>
-.details {
+.banner:before {
+  content: '';
   background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
