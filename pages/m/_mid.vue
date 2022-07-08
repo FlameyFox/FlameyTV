@@ -9,49 +9,123 @@
           :style="backdropImgPath"
         ></div>
         <div
-          class="details w-2/3 mx-auto p-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
+          class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
-          <div class="flex gap-6">
+          <div class="w-80">
             <img
               v-if="movie.poster_path"
               :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
               :alt="movie.title"
-              class="w-72 rounded-md"
+              class="rounded-md"
             />
             <img
-              class="bg-slate-900 w-72 rounded-md"
+              class="bg-slate-900 rounded-md"
               v-else
               src="@/assets/img/noPoster.png"
               alt="No Poster"
             />
-            <div>
-              <div class="bg-slate-800 rounded-lg p-5">
-                <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
-                <h4 class="text-xl italic mb-4">{{ movie.tagline }}</h4>
-                <hr class="border-slate-800 mb-4" />
-                <p>{{ movie.overview }}</p>
+
+            <div class="bg-slate-800 rounded-lg p-5 w-80 mt-6">
+              <h3>Stats</h3>
+              <p>Rating: {{ movie.vote_average }}</p>
+              <p>Budget: {{ movie.budget }}</p>
+              <p>Revenue: {{ movie.revenue }}</p>
+              <p>IMDB id: {{ movie.imdb_id }}</p>
+            </div>
+            <div
+              class="bg-slate-800 rounded-lg p-5 scrollbar w-80 mt-6 max-h-screen overflow-y-scroll"
+            >
+              <h3 class="mb-4 text-lg font-bold">Cast</h3>
+              <div>
+                <div class="flex flex-col">
+                  <div
+                    v-for="member in cast.slice(0, 12)"
+                    :key="member.id"
+                    class="mb-3"
+                  >
+                    <nuxt-link
+                      :to="'/actor/' + member.id"
+                      class="flex gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
+                    >
+                      <img
+                        :src="
+                          'https://image.tmdb.org/t/p/w300_and_h300_bestv2/' +
+                          member.profile_path
+                        "
+                        :alt="member.original_name"
+                        class="w-20 h-20 rounded-md"
+                        v-if="member.profile_path"
+                      />
+                      <img
+                        class="bg-slate-900 w-20 h-20 object-cover rounded-md"
+                        v-else
+                        src="@/assets/img/noPoster.png"
+                        alt="No Profile Image"
+                      />
+                      <div>
+                        {{ member.original_name }}
+                        <span v-if="member.character"
+                          ><br />
+                          as {{ member.character }}</span
+                        >
+                      </div>
+                    </nuxt-link>
+                  </div>
+                  <button
+                    class="bg-slate-900 rounded-lg p-2 w-1/2 mx-auto transition-all hover:bg-opacity-75"
+                    v-if="!seeAllActors"
+                    @click="seeAllActors = true"
+                  >
+                    See all actors
+                  </button>
+                  <div v-if="seeAllActors">
+                    <div
+                      v-for="member in cast.slice(12, 999)"
+                      :key="member.id"
+                      class="mb-3"
+                    >
+                      <nuxt-link
+                        :to="'/actor/' + member.id"
+                        class="flex gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
+                      >
+                        <img
+                          :src="
+                            'https://image.tmdb.org/t/p/w300_and_h300_bestv2/' +
+                            member.profile_path
+                          "
+                          :alt="member.original_name"
+                          class="w-20 h-20 rounded-md"
+                          v-if="member.profile_path"
+                        />
+                        <img
+                          class="bg-slate-900 w-20 h-20 object-cover rounded-md"
+                          v-else
+                          src="@/assets/img/noPoster.png"
+                          alt="No Profile Image"
+                        />
+                        <div>
+                          {{ member.original_name }}
+                          <span v-if="member.character"
+                            ><br />
+                            as {{ member.character }}</span
+                          >
+                        </div>
+                      </nuxt-link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="bg-slate-800 rounded-lg p-5 w-72 mt-6">
-            <h3>Stats</h3>
-            <p>Rating: {{ movie.vote_average }}</p>
-            <p>Budget: {{ movie.budget }}</p>
-            <p>Revenue: {{ movie.revenue }}</p>
-            <p>IMDB id: {{ movie.imdb_id }}</p>
-          </div>
-          <p>Cast: {{ mCredits }}</p>
-
-          <div class="flex flex-wrap">
-            <span
-              v-for="member in cast"
-              :key="member.id"
-              class="inline-block mx-1"
-              ><nuxt-link :to="'/actor/' + member.id">{{
-                member.original_name
-              }}</nuxt-link>
-              as {{ member.character }},</span
-            >
+          <div>
+            <div class="flex gap-6">
+              <div class="bg-slate-800 rounded-lg p-5">
+                <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
+                <h4 class="text-xl italic mb-4">{{ movie.tagline }}</h4>
+                <hr class="border-slate-900 border-opacity-50 mb-4" />
+                <p>{{ movie.overview }}</p>
+              </div>
+            </div>
           </div>
 
           <!-- TODO: Make actor info prettier -->
@@ -73,6 +147,7 @@ export default {
         backgroundImage: '',
       },
       cast: [],
+      seeAllActors: false,
     }
   },
   async created() {

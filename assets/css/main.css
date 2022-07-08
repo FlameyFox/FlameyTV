@@ -7,3 +7,20 @@
     font-family: 'Nunito', system-ui, sans-serif;
   }
 }
+.scrollbar {
+  scrollbar-color: rgb(51, 65, 85) rgb(15, 23, 42);
+  scrollbar-width: thin;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: rgb(15, 23, 42);
+  border-radius: 0.5rem;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  width: 10px;
+  background: rgb(51, 65, 85);
+  border-radius: 0.5rem;
+}
