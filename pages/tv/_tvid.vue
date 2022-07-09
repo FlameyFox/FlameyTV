@@ -2,40 +2,145 @@
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else>
-      <div class="tv bg-no-repeat" :style="backdropImgPath">
-      <div class="details p-8">
-          <img
-            v-if="tv.poster_path"
-            :src="'https://image.tmdb.org/t/p/w500/' + tv.poster_path"
-            :alt="tv.name"
-            class="w-60"
-          />
-          <img
-            class="bg-white w-60"
-            v-else
-            src="@/assets/img/noPoster.png"
-            alt="No Poster"
-          />
-          <h1>{{ tv.name }}</h1>
-          <p>Rating: {{ tv.vote_average }}</p>
-          <p>Budget: {{ tv.budget }}</p>
-          <p>Revenue: {{ tv.revenue }}</p>
-          <p>IMDB id: {{ tv.imdb_id }}</p>
-          <p>Description: {{ tv.overview }}</p>
-          <p>Cast: {{ mCredits }}</p>
+      <div class="tv pb-5">
+        <!-- TODO: MAKE ALT BANNER PICTURE -->
+        <div
+          class="banner bg-cover bg-no-repeat bg-center relative h-96"
+          :style="backdropImgPath"
+        ></div>
+        <div
+          class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
+        >
+          <div class="w-1/3">
+            <img
+              v-if="tv.poster_path"
+              :src="'https://image.tmdb.org/t/p/w500/' + tv.poster_path"
+              :alt="tv.name"
+              class="rounded-md"
+            />
+            <img
+              class="bg-slate-900 rounded-md"
+              v-else
+              src="@/assets/img/noPoster.png"
+              alt="No Poster"
+            />
 
-          <!-- <div class="flex flex-wrap">
-            <span
-              v-for="member in cast"
-              :key="member.id"
-              class="inline-block mx-1"
-              ><nuxt-link :to="'/actor/' + member.id">{{
-                member.original_name
-              }}</nuxt-link>
-              as {{ member.character }},</span
+            <div class="bg-slate-800 rounded-lg p-5 mt-6">
+              <h3>Stats</h3>
+              <p>Rating: {{ tv.vote_average }}</p>
+              <p>Season: {{ tv.number_of_seasons }}</p>
+              <p>Episodes: {{ tv.number_of_episodes }}</p>
+              <p>IMDB id: {{ tv.imdb_id }}</p>
+            </div>
+          </div>
+          <div class="w-2/3">
+            <div class="flex gap-6">
+              <div class="bg-slate-800 rounded-lg p-5">
+                <h1 class="text-4xl font-bold mb-2">
+                  {{ tv.name }} ( {{ tv.original_name }} )
+                </h1>
+
+
+                <!-- 
+                  
+                  TODO: MAKE IT MORE DETAILED - DISPLAY EPISODE INFO
+                  
+                  {{ tv }} -->
+
+
+                <h4 class="text-xl italic mb-4">{{ tv.tagline }}</h4>
+                <hr class="border-slate-900 border-opacity-50 mb-4" />
+                <p>{{ tv.overview }}</p>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
             >
-          </div> -->
+              <h3 class="mb-4 text-lg font-bold">Cast</h3>
+              <div>
+                <div class="flex gap-3 min-w-fit">
+                  <div
+                    v-for="member in cast.slice(0, 12)"
+                    :key="member.id"
+                    class="w-36"
+                  >
+                    <nuxt-link
+                      :to="'/actor/' + member.id"
+                      class="flex flex-col gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
+                    >
+                      <img
+                        :src="
+                          'https://image.tmdb.org/t/p/w300_and_h300_bestv2/' +
+                          member.profile_path
+                        "
+                        :alt="member.original_name"
+                        class="w-32 h-32 rounded-md"
+                        v-if="member.profile_path"
+                      />
+                      <img
+                        class="bg-slate-900 w-32 h-32 object-cover rounded-md"
+                        v-else
+                        src="@/assets/img/noPoster.png"
+                        alt="No Profile Image"
+                      />
+                      <div>
+                        {{ member.original_name }}
+                        <span v-if="member.character"
+                          ><br />
+                          as {{ member.character }}</span
+                        >
+                      </div>
+                    </nuxt-link>
+                  </div>
+                  <button
+                    class="bg-slate-900 w-36 rounded-lg px-2 py-6 mr-4 my-auto transition-all hover:bg-opacity-75"
+                    v-if="!seeAllActors"
+                    @click="seeAllActors = true"
+                  >
+                    See all actors
+                  </button>
+                  <div v-if="seeAllActors" class="flex gap-3 min-w-fit">
+                    <div
+                      v-for="member in cast.slice(12, 999)"
+                      :key="member.id"
+                      class="w-36"
+                    >
+                      <nuxt-link
+                        :to="'/actor/' + member.id"
+                        class="flex flex-col gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
+                      >
+                        <img
+                          :src="
+                            'https://image.tmdb.org/t/p/w300_and_h300_bestv2/' +
+                            member.profile_path
+                          "
+                          :alt="member.original_name"
+                          class="w-32 h-32 rounded-md"
+                          v-if="member.profile_path"
+                        />
+                        <img
+                          class="bg-slate-900 w-32 h-32 object-cover rounded-md"
+                          v-else
+                          src="@/assets/img/noPoster.png"
+                          alt="No Profile Image"
+                        />
+                        <div>
+                          {{ member.original_name }}
+                          <span v-if="member.character"
+                            ><br />
+                            as {{ member.character }}</span
+                          >
+                        </div>
+                      </nuxt-link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <!-- TODO: Make actor info prettier -->
         </div>
       </div>
     </div>
@@ -54,6 +159,7 @@ export default {
         backgroundImage: '',
       },
       cast: [],
+      seeAllActors: false,
     }
   },
   async created() {
@@ -70,7 +176,7 @@ export default {
       result.backdrop_path +
       ')'
 
-    this.getMovieCredits(this.$route.params.mid)
+    this.getMovieCredits(this.$route.params.tvid)
     this.loading = false
   },
 
@@ -88,7 +194,13 @@ export default {
 </script>
 
 <style scoped>
-.details {
+.banner:before {
+  content: '';
   background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
