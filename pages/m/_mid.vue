@@ -28,9 +28,32 @@
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3>Stats</h3>
               <p>Rating: {{ movie.vote_average }}</p>
-              <p>Budget: {{ movie.budget }}</p>
-              <p>Revenue: {{ movie.revenue }}</p>
-              <p>IMDB id: {{ movie.imdb_id }}</p>
+              <p>
+                Budget:
+                {{
+                  Intl.NumberFormat(`en-US`, {
+                    currency: `USD`,
+                    style: 'currency',
+                  }).format(movie.budget)
+                }}
+              </p>
+              <p>
+                Revenue:
+                {{
+                  Intl.NumberFormat(`en-US`, {
+                    currency: `USD`,
+                    style: 'currency',
+                  }).format(movie.revenue)
+                }}
+              </p>
+              <p>
+                <a
+                  target="_blank"
+                  rel="noopener nofollow"
+                  :href="'https://www.imdb.com/title/' + movie.imdb_id"
+                  >IMDB link</a
+                >
+              </p>
             </div>
           </div>
           <div class="w-2/3">
@@ -84,7 +107,7 @@
                   </div>
                   <button
                     class="bg-slate-900 w-36 rounded-lg px-2 py-6 mr-4 my-auto transition-all hover:bg-opacity-75"
-                    v-if="!seeAllActors"
+                    v-if="!seeAllActors && cast.length > 12"
                     @click="seeAllActors = true"
                   >
                     See all actors

@@ -40,13 +40,11 @@
                   {{ tv.name }} ( {{ tv.original_name }} )
                 </h1>
 
-
                 <!-- 
                   
                   TODO: MAKE IT MORE DETAILED - DISPLAY EPISODE INFO
                   
                   {{ tv }} -->
-
 
                 <h4 class="text-xl italic mb-4">{{ tv.tagline }}</h4>
                 <hr class="border-slate-900 border-opacity-50 mb-4" />
@@ -95,7 +93,7 @@
                   </div>
                   <button
                     class="bg-slate-900 w-36 rounded-lg px-2 py-6 mr-4 my-auto transition-all hover:bg-opacity-75"
-                    v-if="!seeAllActors"
+                    v-if="!seeAllActors && cast.length > 12"
                     @click="seeAllActors = true"
                   >
                     See all actors
