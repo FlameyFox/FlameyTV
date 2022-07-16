@@ -97,7 +97,7 @@
           </div>
           <div class="w-2/3">
             <div class="flex gap-6">
-              <div class="bg-slate-800 rounded-lg p-5">
+              <div class="bg-slate-800 rounded-lg p-5 w-full">
                 <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
                 <h4 class="text-xl italic mb-4">{{ movie.tagline }}</h4>
                 <hr class="border-slate-900 border-opacity-50 mb-4" />
