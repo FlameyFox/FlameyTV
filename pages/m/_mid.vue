@@ -46,6 +46,7 @@
                   }).format(movie.revenue)
                 }}
               </p>
+              <p>Runtime: {{ convertTime(movie.runtime) }}</p>
               <p>
                 <a
                   target="_blank"
@@ -89,7 +90,7 @@
                 ></a>
               </p>
             </div>
-            <div class="bg-slate-800 rounded-lg p-5 mt-6">
+            <div v-if="JSON.stringify(providers.results) != '{}'" class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3>Providers</h3>
               <MProviders :providers="providers"></MProviders>
             </div>
@@ -175,6 +176,11 @@ export default {
       const providers = await this.$axios.$get(url)
       this.providers = providers
       this.loading = false
+    },
+    convertTime(num) {
+      var hours = Math.floor(num / 60)
+      var minutes = num % 60
+      return hours + 'h ' + minutes + 'm'
     },
   },
 }

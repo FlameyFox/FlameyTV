@@ -1,3 +1,6 @@
 <template>
-  <MTopMovies />
+  <div>
+    <UIHero />
+    <MTopMovies />
+  </div>
 </template>
