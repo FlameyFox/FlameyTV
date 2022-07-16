@@ -87,8 +87,8 @@ export default {
       const results = await this.$axios.$get(url)
       this.movies = results.results
       this.movies.sort((a, b) => {
-        if (a.vote_average > b.vote_average) return -1
-        if (a.vote_average < b.vote_average) return 1
+        if (a.vote_count > b.vote_count) return -1
+        if (a.vote_count < b.vote_count) return 1
         return 0
       })
       this.loading = false

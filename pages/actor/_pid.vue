@@ -85,10 +85,19 @@
             </div>
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="mb-4 text-lg font-bold">Filmography</h3>
+              <div v-if="credits && credits.length > 1">
+                <div class="grid grid-cols-4 gap-6">
+                  <!-- TODO: CHECK WHAT MOVIE TYPE IT IS -->
+                  <MMovie
+                    :movie="movie"
+                    :loading="loading"
+                    v-for="movie in credits.slice(0, 20)"
+                    :key="movie.id"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- TODO: Make actor info prettier -->
         </div>
       </div>
     </div>
@@ -106,7 +115,7 @@ export default {
       backdropImgPath: {
         backgroundImage: '',
       },
-      cast: [],
+      credits: [],
     }
   },
   async created() {
@@ -118,7 +127,28 @@ export default {
       api
     const person = await this.$axios.$get(url)
     this.person = person
+    this.getPersonMovieCredits()
     this.loading = false
+  },
+  methods: {
+    async getPersonMovieCredits() {
+      this.loading = true
+      const url =
+        'https://api.themoviedb.org/3/person/' +
+        this.$route.params.pid +
+        '/movie_credits?api_key=' +
+        api
+      const credits = await this.$axios.$get(url)
+      this.credits = credits.cast
+      this.credits.sort((a, b) => {
+        if (a.vote_count > b.vote_count) return -1
+        if (a.vote_count < b.vote_count) return 1
+        return 0
+      })
+      // TODO: Maybe sort movies differently
+
+      this.loading = false
+    },
   },
 }
 </script>
