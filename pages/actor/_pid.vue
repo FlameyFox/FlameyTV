@@ -75,7 +75,7 @@
           </div>
           <div class="w-2/3">
             <div class="flex gap-6">
-              <div class="bg-slate-800 rounded-lg p-5">
+              <div class="bg-slate-800 w-full rounded-lg p-5">
                 <h1 class="text-4xl font-bold mb-2">
                   {{ person.name }}
                 </h1>
@@ -87,7 +87,8 @@
               <h3 class="mb-4 text-lg font-bold">Filmography</h3>
               <div v-if="credits && credits.length > 1">
                 <div class="grid grid-cols-4 gap-6">
-                  <!-- TODO: CHECK WHAT MOVIE TYPE IT IS -->
+                  <!-- FIXME: TODO:
+                        Remove duplicate entries when an actor voices more characters -->
                   <MMovie
                     :movie="movie"
                     :loading="loading"
@@ -136,7 +137,7 @@ export default {
       const url =
         'https://api.themoviedb.org/3/person/' +
         this.$route.params.pid +
-        '/movie_credits?api_key=' +
+        '/combined_credits?api_key=' +
         api
       const credits = await this.$axios.$get(url)
       this.credits = credits.cast
