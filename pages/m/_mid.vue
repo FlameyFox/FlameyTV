@@ -31,19 +31,23 @@
               <p>
                 Budget:
                 {{
-                  Intl.NumberFormat(`en-US`, {
-                    currency: `USD`,
-                    style: 'currency',
-                  }).format(movie.budget)
+                  movie.budget != 0
+                    ? Intl.NumberFormat(`en-US`, {
+                        currency: `USD`,
+                        style: 'currency',
+                      }).format(movie.budget)
+                    : '---'
                 }}
               </p>
               <p>
                 Revenue:
                 {{
-                  Intl.NumberFormat(`en-US`, {
-                    currency: `USD`,
-                    style: 'currency',
-                  }).format(movie.revenue)
+                  movie.revenue != 0
+                    ? Intl.NumberFormat(`en-US`, {
+                        currency: `USD`,
+                        style: 'currency',
+                      }).format(movie.revenue)
+                    : '---'
                 }}
               </p>
               <p>Runtime: {{ convertTime(movie.runtime) }}</p>
@@ -90,7 +94,10 @@
                 ></a>
               </p>
             </div>
-            <div v-if="JSON.stringify(providers.results) != '{}'" class="bg-slate-800 rounded-lg p-5 mt-6">
+            <div
+              v-if="JSON.stringify(providers.results) != '{}'"
+              class="bg-slate-800 rounded-lg p-5 mt-6"
+            >
               <h3>Providers</h3>
               <MProviders :providers="providers"></MProviders>
             </div>
