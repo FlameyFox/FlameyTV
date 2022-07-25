@@ -15,6 +15,10 @@
         {{ provider.link.slice(-2) }}
       </option>
     </select>
+    <!-- TODO: MAKE BETTER PROVIDER LIST
+                - show places where you can watch, not only buy
+                - optimize?
+     -->
     <div v-for="provider in providers.results" :key="provider.provider_id">
       <div v-if="provider.link.includes('=' + selectedCountry)">
         <div class="grid grid-cols-4 gap-5 mt-5" v-if="provider.buy">
