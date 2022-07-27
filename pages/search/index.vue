@@ -54,7 +54,6 @@
 </template>
 
 <script>
-const api = process.env.TMDB_API
 export default {
   data() {
     return {
@@ -74,6 +73,7 @@ export default {
   },
   methods: {
     async search() {
+      const api = this.$config.tmdbAPI
       this.loading = true
       var url =
         'https://api.themoviedb.org/3/search/multi?query=' +

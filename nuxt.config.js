@@ -55,6 +55,10 @@ export default {
     },
   },
 
+  publicRuntimeConfig: {
+    tmdbAPI: process.env.TMDB_API
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: {

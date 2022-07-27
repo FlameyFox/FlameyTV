@@ -37,7 +37,6 @@
   </div>
 </template>
 <script>
-const api = process.env.TMDB_API
 export default {
   data() {
     return {
@@ -48,6 +47,7 @@ export default {
     }
   },
   async created() {
+    const api = this.$config.tmdbAPI
     this.loading = true
     const url =
       'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&&vote_count.gte=250&api_key=' +
@@ -69,9 +69,9 @@ export default {
       console.log(movies.results)
       this.currentMoviePage++
 
-      movies.results.forEach(v => {
+      movies.results.forEach((v) => {
         this.movies.push(v)
-      });
+      })
 
       console.log(this.movies)
       this.loadingMoreMovies = false

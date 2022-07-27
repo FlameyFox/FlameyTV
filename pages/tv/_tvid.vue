@@ -67,7 +67,6 @@
 </template>
 
 <script>
-const api = process.env.TMDB_API
 export default {
   data() {
     return {
@@ -81,6 +80,7 @@ export default {
     }
   },
   async created() {
+    const api = this.$config.tmdbAPI
     this.loading = true
     const url =
       'https://api.themoviedb.org/3/tv/' +
