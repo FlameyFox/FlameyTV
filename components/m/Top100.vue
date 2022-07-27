@@ -37,7 +37,6 @@
   </div>
 </template>
 <script>
-const api = process.env.TMDB_API
 export default {
   data() {
     return {
@@ -48,10 +47,9 @@ export default {
     }
   },
   async created() {
+    const api = this.$config.tmdbAPI
     this.loading = true
-    const url =
-      'https://api.themoviedb.org/3/movie/top_rated?api_key=' +
-      api
+    const url = 'https://api.themoviedb.org/3/movie/top_rated?api_key=' + api
     const movies = await this.$axios.$get(url)
     this.movies = movies.results
     this.loading = false
@@ -59,6 +57,7 @@ export default {
 
   methods: {
     async getMoreMovies(pageId) {
+      const api = this.$config.tmdbAPI
       this.loadingMoreMovies = true
       const url =
         'https://api.themoviedb.org/3/movie/top_rated?api_key=' +
@@ -69,9 +68,9 @@ export default {
       console.log(movies.results)
       this.currentMoviePage++
 
-      movies.results.forEach(v => {
+      movies.results.forEach((v) => {
         this.movies.push(v)
-      });
+      })
 
       console.log(this.movies)
       this.loadingMoreMovies = false
