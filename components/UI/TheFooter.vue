@@ -8,7 +8,7 @@
           rel="noopener nofollow"
           href="https://github.com/FlameyFox/FlameyTV"
           class="hover:underline transition-all"
-          >Link to project</a
+          >Github Repo</a
         >
       </p>
     </footer>
