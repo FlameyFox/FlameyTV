@@ -100,6 +100,7 @@ export default {
 
   methods: {
     async getMovieCredits(ID) {
+      const api = this.$config.tmdbAPI
       this.loading = true
       const url =
         'https://api.themoviedb.org/3/tv/' + ID + '/credits?api_key=' + api

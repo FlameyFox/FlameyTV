@@ -133,6 +133,7 @@ export default {
   },
   methods: {
     async getPersonMovieCredits() {
+      const api = this.$config.tmdbAPI
       this.loading = true
       const url =
         'https://api.themoviedb.org/3/person/' +

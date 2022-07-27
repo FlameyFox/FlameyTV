@@ -163,6 +163,7 @@ export default {
 
   methods: {
     async getMovieCredits(movieID) {
+      const api = this.$config.tmdbAPI
       this.loading = true
       const url =
         'https://api.themoviedb.org/3/movie/' +
@@ -174,6 +175,7 @@ export default {
       this.loading = false
     },
     async getMovieProviders(movieID) {
+      const api = this.$config.tmdbAPI
       this.loading = true
       const url =
         'https://api.themoviedb.org/3/movie/' +
