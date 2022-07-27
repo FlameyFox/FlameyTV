@@ -2,6 +2,8 @@
 
 Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 
+[See it in action](https://flamey-tv.vercel.app/)
+
 
 TODO:
 
