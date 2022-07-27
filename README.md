@@ -6,7 +6,6 @@ Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 TODO:
 
 - Migrate to Nuxt3
-- Deploy to Vercel to showcase demo
 
 
 
