@@ -27,7 +27,7 @@
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3>Stats</h3>
-              <p>Rating: {{ movie.vote_average }}</p>
+              <p>Rating: {{ movie.vote_average ? movie.vote_average.toFixed(1) : '---' }}</p>
               <p>
                 Budget:
                 {{

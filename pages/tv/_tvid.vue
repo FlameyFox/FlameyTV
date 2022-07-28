@@ -27,7 +27,7 @@
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3>Stats</h3>
-              <p>Rating: {{ tv.vote_average }}</p>
+              <p>Rating: {{ tv.vote_average ? tv.vote_average.toFixed(1) : '---' }}</p>
               <p>Season: {{ tv.number_of_seasons }}</p>
               <p>Episodes: {{ tv.number_of_episodes }}</p>
             </div>
