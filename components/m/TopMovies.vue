@@ -59,6 +59,7 @@ export default {
 
   methods: {
     async getMoreMovies(pageId) {
+      const api = this.$config.tmdbAPI
       this.loadingMoreMovies = true
       const url =
         'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&&vote_count.gte=250&api_key=' +
