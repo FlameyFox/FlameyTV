@@ -26,7 +26,7 @@
             />
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
-              <h3>Stats</h3>
+              <h3 class="text-2xl mb-3">Information</h3>
               <p>Rating: {{ tv.vote_average ? tv.vote_average.toFixed(1) : '---' }}</p>
               <p>Season: {{ tv.number_of_seasons }}</p>
               <p>Episodes: {{ tv.number_of_episodes }}</p>

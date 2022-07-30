@@ -26,7 +26,7 @@
             />
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
-              <h3>Information</h3>
+              <h3 class="text-2xl mb-3">Information</h3>
               <p>Birthday: {{ person.birthday }}</p>
               <p>Place of birth: {{ person.place_of_birth }}</p>
               <p>
@@ -87,8 +87,11 @@
               <h3 class="mb-4 text-lg font-bold">Filmography</h3>
               <div v-if="credits && credits.length > 1">
                 <div class="grid grid-cols-4 gap-6">
+                  {{credits.slice(0,20)}}
                   <!-- FIXME: TODO:
-                        Remove duplicate entries when an actor voices more characters -->
+                        Remove duplicate entries when an actor voices more characters
+                        maybe check media type and show which character if it's a tv show
+                         -->
                   <MMovie
                     :movie="movie"
                     :loading="loading"

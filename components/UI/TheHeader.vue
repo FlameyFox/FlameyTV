@@ -9,9 +9,6 @@
           <nuxt-link to="/">Home</nuxt-link>
         </li>
         <li class="list-none px-2">
-          <nuxt-link to="#">Newest</nuxt-link>
-        </li>
-        <li class="list-none px-2">
           <nuxt-link to="/100">Top 100</nuxt-link>
         </li>
         <li class="list-none px-2">
