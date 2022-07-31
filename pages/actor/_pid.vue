@@ -26,7 +26,7 @@
             />
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
-              <h3 class="text-2xl mb-3">Information</h3>
+              <h3 class="text-2xl font-bold mb-3">Information</h3>
               <p>Birthday: {{ person.birthday }}</p>
               <p>Place of birth: {{ person.place_of_birth }}</p>
               <p>
@@ -84,7 +84,7 @@
               </div>
             </div>
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
-              <h3 class="mb-4 text-lg font-bold">Filmography</h3>
+              <h3 class="mb-4 text-2xl font-bold">Filmography</h3>
               <div v-if="credits && credits.length > 1">
                 <div class="grid grid-cols-4 gap-6">
                   <!-- FIXME: TODO:
