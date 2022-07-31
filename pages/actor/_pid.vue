@@ -87,7 +87,6 @@
               <h3 class="mb-4 text-lg font-bold">Filmography</h3>
               <div v-if="credits && credits.length > 1">
                 <div class="grid grid-cols-4 gap-6">
-                  {{credits.slice(0,20)}}
                   <!-- FIXME: TODO:
                         Remove duplicate entries when an actor voices more characters
                         maybe check media type and show which character if it's a tv show

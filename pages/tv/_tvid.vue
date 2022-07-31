@@ -54,7 +54,7 @@
             <div
               class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
             >
-              <h3 class="mb-4 text-lg font-bold">Cast</h3>
+              <h3 class="mb-4 text-2xl font-bold">Cast</h3>
               <TvCast :cast="cast"></TvCast>
             </div>
           </div>

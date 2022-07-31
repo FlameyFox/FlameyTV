@@ -99,7 +99,7 @@
               v-if="JSON.stringify(providers.results) != '{}'"
               class="bg-slate-800 rounded-lg p-5 mt-6"
             >
-              <h3>Providers</h3>
+              <h3 class="mb-4 text-2xl font-bold">Providers</h3>
               <MProviders :providers="providers"></MProviders>
             </div>
           </div>
@@ -116,7 +116,7 @@
             <div
               class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
             >
-              <h3 class="mb-4 text-lg font-bold">Cast</h3>
+              <h3 class="mb-4 text-xl font-bold">Cast</h3>
               <MCast :cast="cast"></MCast>
             </div>
           </div>
