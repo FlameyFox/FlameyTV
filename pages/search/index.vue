@@ -2,7 +2,7 @@
   <div class="max-w-screen-2xl m-auto py-6">
     <div class="flex justify-center flex-col items-center">
       <h2 class="text-4xl font-black text-center">
-        Search movies, TV shows and more..
+        Search movies, TV shows, actors and more..
       </h2>
       <div class="d-flex gap-2">
         <input

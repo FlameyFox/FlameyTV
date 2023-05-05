@@ -1,9 +1,20 @@
+<!--
+        
+        
+        TODO: 
+        
+        - MAKE ALT BANNER PICTURE
+        - MAKE SKELETON LOADERS FOR ENTIRE PAGE
+        
+        
+        
+        -->
+
 <template>
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div class="movie pb-5">
-        <!-- TODO: MAKE ALT BANNER PICTURE -->
         <div
           class="banner bg-cover bg-no-repeat bg-center relative h-96"
           :style="backdropImgPath"
@@ -27,8 +38,11 @@
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="text-2xl font-bold mb-3">Information</h3>
-              <p>Release date: {{ movie.release_date}}</p>
-              <p>Rating: {{ movie.vote_average ? movie.vote_average.toFixed(1) : '---' }}</p>
+              <p>Release date: {{ movie.release_date }}</p>
+              <p>
+                Rating:
+                {{ movie.vote_average ? movie.vote_average.toFixed(1) : '---' }}
+              </p>
               <p>
                 Budget:
                 {{
@@ -103,7 +117,7 @@
               <MProviders :providers="providers"></MProviders>
             </div>
           </div>
-          <div class="w-2/3">
+          <div class="w-2/3 overflow-hidden">
             <div class="flex gap-6">
               <div class="bg-slate-800 rounded-lg p-5 w-full">
                 <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
