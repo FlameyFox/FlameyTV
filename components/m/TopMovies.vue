@@ -1,8 +1,10 @@
 <template>
-  <div class="max-w-screen-2xl m-auto py-6">
+  <div class="max-w-screen-2xl m-auto py-6 px-6">
     <h2 class="text-4xl font-black mb-2">Most popular Movies</h2>
     <div v-if="loading">
-      <div class="grid grid-cols-6 gap-6">
+      <div
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+      >
         <div
           class="bg-slate-700 shadow rounded-md p-4 max-w-sm w-full mx-auto animate-pulse"
           v-for="num in 6"
@@ -11,7 +13,10 @@
       </div>
     </div>
     <div v-else>
-      <div v-if="currentMoviePage < 3" class="grid grid-cols-6 gap-6">
+      <div
+        v-if="currentMoviePage < 3"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+      >
         <MMovie
           :movie="movie"
           :loading="loading"
@@ -19,7 +24,7 @@
           :key="movie.id"
         />
       </div>
-      <div v-else class="grid grid-cols-6 gap-6">
+      <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
         <MMovie
           :movie="movie"
           :loading="loading"
