@@ -1,3 +1,14 @@
+<!-- 
+
+TODO: 
+
+- Make all images more uniform
+- optimization?
+
+-->
+
+
+
 <template>
   <div v-if="movie.media_type" class="...">
     <div v-if="movie.media_type === 'movie'" class="movie overflow-hidden">
@@ -62,7 +73,7 @@
         <img
           class="bg-white"
           v-else
-          src="@/assets/img/noPoster.png"
+          src="@/assets/img/noActor.png"
           alt="No Poster"
         />
         <div
@@ -107,7 +118,10 @@
 
 <script>
 export default {
-  props: ['movie'],
+  props: ['movie','mtype'],
+  async created() {
+    this.movie.media_type = this.mtype
+  },
 }
 </script>
 

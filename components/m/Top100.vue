@@ -65,14 +65,11 @@ export default {
         '&page=' +
         pageId
       const movies = await this.$axios.$get(url)
-      console.log(movies.results)
       this.currentMoviePage++
 
       movies.results.forEach((v) => {
         this.movies.push(v)
       })
-
-      console.log(this.movies)
       this.loadingMoreMovies = false
     },
   },

@@ -18,7 +18,7 @@
           <img
             class="bg-slate-900 w-32 h-32 object-cover rounded-md"
             v-else
-            src="@/assets/img/noPoster.png"
+            src="@/assets/img/noActor.png"
             alt="No Profile Image"
           />
           <div>
@@ -59,7 +59,7 @@
             <img
               class="bg-slate-900 w-32 h-32 object-cover rounded-md"
               v-else
-              src="@/assets/img/noPoster.png"
+              src="@/assets/img/noActor.png"
               alt="No Profile Image"
             />
             <div>
