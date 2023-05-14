@@ -1,0 +1,190 @@
+<template>
+  <div>
+    <div v-if="loading">
+      <div
+        class="bg-slate-700 shadow rounded-md p-4 h-96 w-full mx-auto animate-pulse"
+      ></div>
+      <div
+        class="details w-2/3 mx-auto p-6 flex gap-6 bg-opacity-40 mt-5 bg-slate-700 shadow rounded-lg h-96 animate-pulse"
+      ></div>
+      Loading...
+    </div>
+    <div v-else>
+      <div class="tv pb-5">
+        <!-- TODO: MAKE ALT BANNER PICTURE -->
+        <div
+          class="banner bg-cover bg-no-repeat bg-center relative h-96"
+          :style="backdropImgPath"
+        ></div>
+        <div
+          class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
+        >
+          <div class="w-1/3">
+            <img
+              v-if="tv.poster_path"
+              :src="'https://image.tmdb.org/t/p/w500/' + tv.poster_path"
+              :alt="tv.name"
+              class="rounded-md"
+            />
+            <img
+              class="bg-slate-900 rounded-md"
+              v-else
+              src="@/assets/img/noPoster.png"
+              alt="No Poster"
+            />
+
+            <div class="bg-slate-800 rounded-lg p-5 mt-6">
+              <h3 class="text-2xl mb-3 font-bold">Information</h3>
+              <p>
+                Rating:
+                {{ tv.vote_average ? tv.vote_average.toFixed(1) : '---' }}
+              </p>
+            </div>
+          </div>
+          <div class="w-2/3">
+            <div class="flex gap-6">
+              <div class="bg-slate-800 rounded-lg p-5">
+                <h1
+                  v-if="tv.name === tv.original_name"
+                  class="text-4xl font-bold mb-2"
+                >
+                  {{ tv.name }}
+                </h1>
+                <h1
+                  v-else-if="tv.original_name"
+                  class="text-4xl font-bold mb-2"
+                >
+                  {{ tv.name }} ( {{ tv.original_name }} )
+                </h1>
+                <h1 v-else class="text-4xl font-bold mb-2">
+                  {{ tv.name }}
+                </h1>
+
+                <!-- 
+                  
+                  TODO: MAKE IT MORE DETAILED - DISPLAY EPISODE INFO
+                  
+                  {{ tv }} -->
+
+                <h4 v-if="tv.tagline" class="text-xl italic mb-4">
+                  {{ tv.tagline }}
+                </h4>
+                <hr class="border-slate-900 border-opacity-50 mb-4" />
+                <p>{{ tv.overview }}</p>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
+            >
+              <h3 class="mb-4 text-2xl font-bold">Cast</h3>
+              <TvCast :cast="cast"></TvCast>
+            </div>
+            <div v-if="tv.seasons" class="seasons mt-3">
+              <h3 class="text-2xl mb-1 font-bold">Seasons</h3>
+              <p>Number of seasons: {{ tv.number_of_seasons }}</p>
+              <nuxt-link
+                class="bg-slate-900 p-4 rounded-md mb-3 mt-3 flex gap-3"
+                v-for="season in tv.seasons"
+                :key="season.id"
+                :to="'/tv/' + tv.id + '/season/' + season.season_number"
+              >
+                <div class="w-1/3">
+                  <img
+                    v-if="season.poster_path"
+                    :src="
+                      'https://image.tmdb.org/t/p/w500/' + season.poster_path
+                    "
+                    :alt="season.name"
+                    class="rounded-md w-full"
+                  />
+                  <img
+                    class="bg-slate-900 rounded-md"
+                    v-else
+                    src="@/assets/img/noPoster.png"
+                    alt="No Poster"
+                  />
+                </div>
+                <div class="w-2/3">
+                  <h3 class="text-2xl mb-3 font-bold">{{ season.name }}</h3>
+                  <p class="text-sm">{{ season.overview }}</p>
+                  <p>Episodes: {{ season.episode_count }}</p>
+                </div>
+              </nuxt-link>
+            </div>
+          </div>
+
+          <!-- TODO: Make actor info prettier -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      tv: null,
+      loading: false,
+      showMore: false,
+      backdropImgPath: {
+        backgroundImage: '',
+      },
+      cast: [],
+      season: [],
+    }
+  },
+  async created() {
+    const api = this.$config.tmdbAPI
+    this.loading = true
+    const url =
+      'https://api.themoviedb.org/3/tv/' +
+      this.$route.params.tvid +
+      '?api_key=' +
+      api
+    const result = await this.$axios.$get(url)
+    this.tv = result
+    this.backdropImgPath.backgroundImage =
+      'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' +
+      result.backdrop_path +
+      ')'
+
+    this.getMovieCredits(this.$route.params.tvid)
+    this.loading = false
+  },
+
+  methods: {
+    async getMovieCredits(ID) {
+      const api = this.$config.tmdbAPI
+      this.loading = true
+      const url =
+        'https://api.themoviedb.org/3/tv/' + ID + '/credits?api_key=' + api
+      const credits = await this.$axios.$get(url)
+      this.cast = credits.cast
+      this.loading = false
+    },
+    async getTVSeasons(ID, seasonNum) {
+      const api = this.$config.tmdbAPI
+      this.loading = true
+      const url =
+        'https://api.themoviedb.org/3/tv/' + ID + '/season/' + seasonNum
+      const season = await this.$axios.$get(url)
+      this.season = season
+      this.loading = false
+    },
+  },
+}
+</script>
+
+<style scoped>
+.banner:before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>

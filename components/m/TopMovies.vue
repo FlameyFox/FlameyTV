@@ -1,7 +1,11 @@
 <template>
   <div class="max-w-screen-2xl m-auto py-6 px-6">
-    <h2 class="text-4xl w-full text-center font-black mb-2">Most popular movies</h2>
-    <p class="text-xl w-full text-center font-medium mb-5">See what movies are trending right now</p>
+    <h2 class="text-4xl w-full text-center font-black mb-2">
+      Most popular movies
+    </h2>
+    <p class="text-xl w-full text-center font-medium mb-5">
+      See what movies are trending right now
+    </p>
     <div v-if="loading">
       <div
         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
@@ -25,7 +29,10 @@
           :key="movie.id"
         />
       </div>
-      <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+      <div
+        v-else
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+      >
         <MMovie
           :movie="movie"
           :loading="loading"

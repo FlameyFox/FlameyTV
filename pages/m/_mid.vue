@@ -15,9 +15,9 @@
         class="bg-slate-700 shadow rounded-md p-4 h-96 w-full mx-auto animate-pulse"
       ></div>
 
-        <div
-          class="details w-2/3 mx-auto p-6 flex gap-6 bg-opacity-40 mt-5 bg-slate-700 shadow rounded-lg h-96 animate-pulse"
-        ></div>
+      <div
+        class="details w-2/3 mx-auto p-6 flex gap-6 bg-opacity-40 mt-5 bg-slate-700 shadow rounded-lg h-96 animate-pulse"
+      ></div>
       Loading...
     </div>
     <div v-else>
