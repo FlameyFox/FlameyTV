@@ -12,14 +12,15 @@ TODO:
 <template>
   <div v-if="movie.media_type" class="...">
     <div v-if="movie.media_type === 'movie'" class="movie overflow-hidden">
-      <nuxt-link :to="'/m/' + movie.id" class="block relative">
+      <nuxt-link :to="'/m/' + movie.id" class="flex h-full relative">
         <img
           v-if="movie.poster_path"
           :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
           :alt="movie.title"
+          class="h-full w-full object-cover"
         />
         <img
-          class="bg-white"
+          class="h-full w-full object-cover bg-white"
           v-else
           src="@/assets/img/noPoster.png"
           alt="No Poster"
@@ -38,14 +39,15 @@ TODO:
       </nuxt-link>
     </div>
     <div v-if="movie.media_type === 'tv'" class="movie overflow-hidden">
-      <nuxt-link :to="'/tv/' + movie.id" class="block relative">
+      <nuxt-link :to="'/tv/' + movie.id" class="flex h-full relative">
         <img
           v-if="movie.poster_path"
           :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
           :alt="movie.title"
+          class="h-full w-full object-cover"
         />
         <img
-          class="bg-white"
+          class="bg-white h-full w-full object-cover"
           v-else
           src="@/assets/img/noPoster.png"
           alt="No Poster"
@@ -117,6 +119,9 @@ TODO:
 </template>
 
 <script>
+
+// TODO: improve logic for media types
+
 export default {
   props: ['movie','mtype'],
   async created() {
@@ -134,6 +139,9 @@ export default {
   );
   transition: all 0.3s ease-in-out;
   opacity: 0;
+}
+.movie{
+  height: 100%;
 }
 .movie:hover .details {
   opacity: 1;

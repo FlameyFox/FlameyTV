@@ -21,9 +21,9 @@
         >
           <div class="w-1/3">
             <img
-              v-if="tv.poster_path"
-              :src="'https://image.tmdb.org/t/p/w500/' + tv.poster_path"
-              :alt="tv.name"
+              v-if="season.poster_path"
+              :src="'https://image.tmdb.org/t/p/w500/' + season.poster_path"
+              :alt="season.name"
               class="rounded-md"
             />
             <img
@@ -37,40 +37,23 @@
               <h3 class="text-2xl mb-3 font-bold">Information</h3>
               <p>
                 Rating:
-                {{ tv.vote_average ? tv.vote_average.toFixed(1) : '---' }}
+                {{
+                  season.vote_average ? season.vote_average.toFixed(1) : '---'
+                }}
               </p>
             </div>
           </div>
           <div class="w-2/3">
             <div class="flex gap-6">
               <div class="bg-slate-800 w-full rounded-lg p-5">
-                <h1
-                  v-if="tv.name === tv.original_name"
-                  class="text-4xl font-bold mb-2"
+                <nuxt-link class="bg-slate-700 text-sm rounded-md py-1 px-3" :to="'/tv/' + this.$route.params.tvid"
+                  >Go back to show</nuxt-link
                 >
-                  {{ tv.name }}
+                <h1 class="mt-5 text-4xl font-bold mb-2">
+                  {{ season.name }}
                 </h1>
-                <h1
-                  v-else-if="tv.original_name"
-                  class="text-4xl font-bold mb-2"
-                >
-                  {{ tv.name }} ( {{ tv.original_name }} )
-                </h1>
-                <h1 v-else class="text-4xl font-bold mb-2">
-                  {{ tv.name }}
-                </h1>
-
-                <!-- 
-                  
-                  TODO: MAKE IT MORE DETAILED - DISPLAY EPISODE INFO
-                  
-                  {{ tv }} -->
-
-                <h4 v-if="tv.tagline" class="text-xl italic mb-4">
-                  {{ tv.tagline }}
-                </h4>
                 <hr class="border-slate-900 border-opacity-50 mb-4" />
-                <p>{{ tv.overview }}</p>
+                <p>{{ season.overview }}</p>
               </div>
             </div>
 
@@ -80,22 +63,29 @@
               <h3 class="mb-4 text-2xl font-bold">Cast</h3>
               <TvCast :cast="cast"></TvCast>
             </div>
-            <div v-if="tv.seasons" class="seasons mt-3">
-              <h3 class="text-2xl mb-2 font-bold">Seasons</h3>
+            <div v-if="season.episodes" class="seasons mt-3">
+              <h3 class="text-2xl mb-2 font-bold">Episodes</h3>
               <div class="gap-3 grid grid-cols-2">
                 <nuxt-link
-                  class="bg-slate-800 p-4 rounded-md flex gap-3 flex-shrink-0 max-w-full"
-                  v-for="season in tv.seasons"
-                  :key="season.id"
-                  :to="'/tv/' + tv.id + '/season/' + season.season_number"
+                  class="bg-slate-800 p-4 rounded-md flex flex-col gap-3 flex-shrink-0 max-w-full"
+                  v-for="episode in season.episodes"
+                  :key="episode.id"
+                  :to="
+                    '/tv/' +
+                    tv +
+                    '/season/' +
+                    season.season_number +
+                    '/episode/' +
+                    episode.episode_number
+                  "
                 >
-                  <div class="w-1/3">
+                  <div class="w-full">
                     <img
-                      v-if="season.poster_path"
+                      v-if="episode.still_path"
                       :src="
-                        'https://image.tmdb.org/t/p/w500/' + season.poster_path
+                        'https://image.tmdb.org/t/p/w500/' + episode.still_path
                       "
-                      :alt="season.name"
+                      :alt="episode.name"
                       class="rounded-md w-full"
                     />
                     <img
@@ -105,17 +95,19 @@
                       alt="No Poster"
                     />
                   </div>
-                  <div class="w-2/3">
-                    <h3 class="text-xl mb-2 font-bold">{{ season.name }}</h3>
-                    <p class="text-sm mb-2">{{ season.overview.replace(/(.{80})..+/, "$1&hellip;") }}</p>
-                    <p class="text-sm">Episodes: {{ season.episode_count }}</p>
+                  <div>
+                    <h3 class="text-xl mb-2 font-bold">{{ episode.name }}</h3>
+                    <p class="text-sm mb-2">
+                      {{ episode.overview.replace(/(.{80})..+/, '$1&hellip;') }}
+                    </p>
+                    <p class="text-sm">Air date: {{ episode.air_date }}</p>
+                    <p class="text-sm">Rating: {{ episode.vote_average }}</p>
+                    <p class="text-sm">Runtime: {{ episode.runtime }} min</p>
                   </div>
                 </nuxt-link>
               </div>
             </div>
           </div>
-
-          <!-- TODO: Make actor info prettier -->
         </div>
       </div>
     </div>
@@ -126,32 +118,31 @@
 export default {
   data() {
     return {
+      season: null,
       tv: null,
       loading: false,
-      showMore: false,
       backdropImgPath: {
         backgroundImage: '',
       },
       cast: [],
-      season: [],
     }
   },
   async created() {
     const api = this.$config.tmdbAPI
+    this.tv = this.$route.params.tvid
     this.loading = true
     const url =
       'https://api.themoviedb.org/3/tv/' +
-      this.$route.params.tvid +
+      this.tv +
+      '/season/' +
+      this.$route.params.seasonnum +
       '?api_key=' +
       api
     const result = await this.$axios.$get(url)
-    this.tv = result
-    this.backdropImgPath.backgroundImage =
-      'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' +
-      result.backdrop_path +
-      ')'
+    this.season = result
 
     this.getMovieCredits(this.$route.params.tvid)
+
     this.loading = false
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-2xl m-auto py-6  px-6">
+  <div class="max-w-screen-2xl m-auto py-6 px-6">
     <div class="flex justify-center flex-col items-center">
       <h2 class="text-4xl font-black text-center">
         Search movies, TV shows, actors and more..
@@ -25,7 +25,9 @@
 
     <div class="results mt-6">
       <div v-if="loading">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+        >
           <div
             class="bg-slate-700 shadow rounded-md p-4 max-w-sm w-full mx-auto animate-pulse"
             v-for="num in 6"
@@ -34,10 +36,13 @@
         </div>
       </div>
       <div v-else-if="movies && movies.length > 1">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+        >
           <!-- TODO: CHECK WHAT MOVIE TYPE IT IS -->
           <MMovie
             :movie="movie"
+            :mtype="mtype"
             :loading="loading"
             v-for="movie in movies.slice(0, 18)"
             :key="movie.id"
@@ -45,7 +50,9 @@
         </div>
       </div>
       <div v-else-if="query && query.length > 2">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+        >
           <p>No results...</p>
         </div>
       </div>
@@ -62,6 +69,7 @@ export default {
       showMore: false,
       query: null,
       adult: false,
+      mtype: 'tv',
     }
   },
   watch: {

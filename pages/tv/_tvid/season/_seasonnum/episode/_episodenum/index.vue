@@ -1,3 +1,13 @@
+
+<!--
+
+TODO: Make it easy to go between episodes in the same season and show.
+
+ -->
+
+
+
+
 <template>
   <div>
     <div v-if="loading">
@@ -21,9 +31,9 @@
         >
           <div class="w-1/3">
             <img
-              v-if="season.poster_path"
-              :src="'https://image.tmdb.org/t/p/w500/' + season.poster_path"
-              :alt="season.name"
+              v-if="episode.still_path"
+              :src="'https://image.tmdb.org/t/p/w500/' + episode.still_path"
+              :alt="episode.name"
               class="rounded-md"
             />
             <img
@@ -35,29 +45,29 @@
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="text-2xl mb-3 font-bold">Information</h3>
+              <p>Air date: {{episode.air_date}}</p>
               <p>
                 Rating:
                 {{
-                  season.vote_average ? season.vote_average.toFixed(1) : '---'
+                  episode.vote_average ? episode.vote_average.toFixed(1) : '---'
                 }}
               </p>
+              <p>Runtime: {{episode.runtime}} min</p>
             </div>
           </div>
           <div class="w-2/3">
             <div class="flex gap-6">
-              <div class="bg-slate-800 rounded-lg p-5">
-                <nuxt-link :to="'/tv/' + this.$route.params.tvid"
-                  >Go back to show</nuxt-link
+              <div class="bg-slate-800  w-full rounded-lg p-5">
+                <nuxt-link
+                  class="bg-slate-700 text-sm rounded-md py-1 px-3"
+                  :to="'/tv/' + this.$route.params.tvid + '/season/' + this.$route.params.seasonnum"
+                  >Go back to season</nuxt-link
                 >
                 <h1 class="mt-5 text-4xl font-bold mb-2">
-                  {{ season.name }}
+                  {{ episode.name }}
                 </h1>
                 <hr class="border-slate-900 border-opacity-50 mb-4" />
-                <p>{{ season.overview }}</p>
-
-                <strong class="mt-5 block"
-                  >TODO: Episodes coming soon...</strong
-                >
+                <p>{{ episode.overview }}</p>
               </div>
             </div>
 
@@ -65,11 +75,15 @@
               class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
             >
               <h3 class="mb-4 text-2xl font-bold">Cast</h3>
-              <TvCast :cast="cast"></TvCast>
+              <TvCast :cast="this.cast"></TvCast>
+            </div>
+            <div
+              class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
+            >
+              <h3 class="mb-4 text-2xl font-bold">Crew</h3>
+              <TvCast :cast="episode.crew"></TvCast>
             </div>
           </div>
-
-          <!-- TODO: Make actor info prettier -->
         </div>
       </div>
     </div>
@@ -81,6 +95,8 @@ export default {
   data() {
     return {
       season: null,
+      tv: null,
+      episode: null,
       loading: false,
       backdropImgPath: {
         backgroundImage: '',
@@ -90,16 +106,22 @@ export default {
   },
   async created() {
     const api = this.$config.tmdbAPI
+    this.tv = this.$route.params.tvid
+    this.season = this.$route.params.seasonnum
+
+
     this.loading = true
     const url =
       'https://api.themoviedb.org/3/tv/' +
-      this.$route.params.tvid +
+      this.tv +
       '/season/' +
       this.$route.params.seasonnum +
+      '/episode/' +
+      this.$route.params.episodenum +
       '?api_key=' +
       api
     const result = await this.$axios.$get(url)
-    this.season = result
+    this.episode = result
 
     this.getMovieCredits(this.$route.params.tvid)
 
@@ -114,15 +136,6 @@ export default {
         'https://api.themoviedb.org/3/tv/' + ID + '/credits?api_key=' + api
       const credits = await this.$axios.$get(url)
       this.cast = credits.cast
-      this.loading = false
-    },
-    async getTVSeasons(ID, seasonNum) {
-      const api = this.$config.tmdbAPI
-      this.loading = true
-      const url =
-        'https://api.themoviedb.org/3/tv/' + ID + '/season/' + seasonNum
-      const season = await this.$axios.$get(url)
-      this.season = season
       this.loading = false
     },
   },
