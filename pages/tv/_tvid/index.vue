@@ -76,9 +76,17 @@
 
             <div
               class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
+              v-if="cast.length > 0"
             >
               <h3 class="mb-4 text-2xl font-bold">Cast</h3>
               <TvCast :cast="cast"></TvCast>
+            </div>
+            <div
+              class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
+              v-if="crew.length > 0"
+            >
+              <h3 class="mb-4 text-2xl font-bold">Crew</h3>
+              <TvCast :cast="crew"></TvCast>
             </div>
             <div v-if="tv.seasons" class="seasons mt-3">
               <h3 class="text-2xl mb-2 font-bold">Seasons</h3>
@@ -107,7 +115,9 @@
                   </div>
                   <div class="w-2/3">
                     <h3 class="text-xl mb-2 font-bold">{{ season.name }}</h3>
-                    <p class="text-sm mb-2">{{ season.overview.replace(/(.{80})..+/, "$1&hellip;") }}</p>
+                    <p class="text-sm mb-2">
+                      {{ season.overview.replace(/(.{80})..+/, '$1&hellip;') }}
+                    </p>
                     <p class="text-sm">Episodes: {{ season.episode_count }}</p>
                   </div>
                 </nuxt-link>
@@ -133,6 +143,7 @@ export default {
         backgroundImage: '',
       },
       cast: [],
+      crew: [],
       season: [],
     }
   },
@@ -163,6 +174,7 @@ export default {
         'https://api.themoviedb.org/3/tv/' + ID + '/credits?api_key=' + api
       const credits = await this.$axios.$get(url)
       this.cast = credits.cast
+      this.crew = credits.crew
       this.loading = false
     },
     async getTVSeasons(ID, seasonNum) {

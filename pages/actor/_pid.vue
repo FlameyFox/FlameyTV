@@ -36,8 +36,9 @@
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="text-2xl font-bold mb-3">Information</h3>
-              <p>Birthday: {{ person.birthday }}</p>
-              <p>Place of birth: {{ person.place_of_birth }}</p>
+              <p>Known for: {{ person.known_for_department }}</p>
+              <p v-if="person.birthday">Birthday: {{ person.birthday }} ({{calculateAge(person.birthday,new Date())}} years old)</p>
+              <p v-if="person.place_of_birth">Place of birth: {{ person.place_of_birth }}</p>
               <p>
                 <a
                   target="_blank"
@@ -105,6 +106,7 @@
                     :loading="loading"
                     v-for="movie in credits.slice(0, 20)"
                     :key="movie.id"
+                    :mtype="movie.media_type"
                   />
                 </div>
               </div>
@@ -153,14 +155,26 @@ export default {
         api
       const credits = await this.$axios.$get(url)
       this.credits = credits.cast
-      this.credits.sort((a, b) => {
-        if (a.vote_count > b.vote_count) return -1
-        if (a.vote_count < b.vote_count) return 1
-        return 0
-      })
+      this.credits.sort((a, b) => b.vote_count - a.vote_count);
       // TODO: Maybe sort movies differently
 
       this.loading = false
+    },
+    calculateAge(birthDate, otherDate) {
+      birthDate = new Date(birthDate)
+      otherDate = new Date(otherDate)
+
+      var years = otherDate.getFullYear() - birthDate.getFullYear()
+
+      if (
+        otherDate.getMonth() < birthDate.getMonth() ||
+        (otherDate.getMonth() == birthDate.getMonth() &&
+          otherDate.getDate() < birthDate.getDate())
+      ) {
+        years--
+      }
+
+      return years
     },
   },
 }

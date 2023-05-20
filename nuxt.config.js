@@ -55,6 +55,11 @@ export default {
     },
   },
 
+  pageTransition: {
+    name: 'home',
+    mode: 'out-in'
+  },
+
   publicRuntimeConfig: {
     tmdbAPI: process.env.TMDB_API,
   },

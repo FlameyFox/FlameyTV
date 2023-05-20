@@ -23,3 +23,12 @@
   background: rgb(51, 65, 85);
   border-radius: 0.5rem;
 }
+
+.home-enter-active,
+.home-leave-active {
+  transition: opacity 0.4s;
+}
+.home-enter,
+.home-leave-active {
+  opacity: 0;
+}

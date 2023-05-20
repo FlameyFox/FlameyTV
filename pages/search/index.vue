@@ -42,7 +42,7 @@
           <!-- TODO: CHECK WHAT MOVIE TYPE IT IS -->
           <MMovie
             :movie="movie"
-            :mtype="mtype"
+            :mtype="movie.media_type"
             :loading="loading"
             v-for="movie in movies.slice(0, 18)"
             :key="movie.id"

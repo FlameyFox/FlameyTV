@@ -1,12 +1,8 @@
-
 <!--
 
 TODO: Make it easy to go between episodes in the same season and show.
 
  -->
-
-
-
 
 <template>
   <div>
@@ -45,26 +41,31 @@ TODO: Make it easy to go between episodes in the same season and show.
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="text-2xl mb-3 font-bold">Information</h3>
-              <p>Air date: {{episode.air_date}}</p>
+              <p>Air date: {{ episode.air_date }}</p>
               <p>
                 Rating:
                 {{
                   episode.vote_average ? episode.vote_average.toFixed(1) : '---'
                 }}
               </p>
-              <p>Runtime: {{episode.runtime}} min</p>
+              <p>Runtime: {{ episode.runtime }} min</p>
             </div>
           </div>
           <div class="w-2/3">
             <div class="flex gap-6">
-              <div class="bg-slate-800  w-full rounded-lg p-5">
+              <div class="bg-slate-800 w-full rounded-lg p-5">
                 <nuxt-link
                   class="bg-slate-700 text-sm rounded-md py-1 px-3"
-                  :to="'/tv/' + this.$route.params.tvid + '/season/' + this.$route.params.seasonnum"
+                  :to="
+                    '/tv/' +
+                    this.$route.params.tvid +
+                    '/season/' +
+                    this.$route.params.seasonnum
+                  "
                   >Go back to season</nuxt-link
                 >
                 <h1 class="mt-5 text-4xl font-bold mb-2">
-                  {{ episode.name }}
+                  {{ episode.episode_number }}. {{ episode.name }}
                 </h1>
                 <hr class="border-slate-900 border-opacity-50 mb-4" />
                 <p>{{ episode.overview }}</p>
@@ -108,7 +109,6 @@ export default {
     const api = this.$config.tmdbAPI
     this.tv = this.$route.params.tvid
     this.season = this.$route.params.seasonnum
-
 
     this.loading = true
     const url =

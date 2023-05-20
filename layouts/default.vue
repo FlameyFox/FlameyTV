@@ -7,3 +7,9 @@
     <UITheFooter />
   </div>
 </template>
+
+<script>
+export default {
+  transition: 'home',
+}
+</script>
