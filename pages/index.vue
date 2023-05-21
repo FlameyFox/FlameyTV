@@ -1,7 +1,6 @@
 <template>
   <div>
     <UIHero />
-    <MTopMovies />
-    <MTopShows />
+    <Trending />
   </div>
 </template>

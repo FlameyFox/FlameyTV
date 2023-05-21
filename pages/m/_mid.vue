@@ -34,10 +34,10 @@
               v-if="movie.poster_path"
               :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
               :alt="movie.title"
-              class="rounded-md"
+              class="rounded-md w-full"
             />
             <img
-              class="bg-slate-900 rounded-md"
+              class="bg-slate-900 rounded-md w-full"
               v-else
               src="@/assets/img/noPoster.png"
               alt="No Poster"
@@ -72,8 +72,6 @@
               <MCast :cast="cast"></MCast>
             </div>
           </div>
-
-          <!-- TODO: Make actor info prettier -->
         </div>
       </div>
     </div>

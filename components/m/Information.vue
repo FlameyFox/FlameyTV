@@ -28,6 +28,12 @@
       }}
     </p>
     <p>Runtime: {{ convertTime(movie.runtime) }}</p>
+    <div class="mt-3" v-if="movie.genres">
+      <strong>Genres:</strong>
+      <p v-for="genre in movie.genres" :key="genre.id">
+        {{ genre.name }}
+      </p>
+    </div>
     <p>
       <a
         target="_blank"

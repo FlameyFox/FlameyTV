@@ -39,6 +39,24 @@
                 Rating:
                 {{ tv.vote_average ? tv.vote_average.toFixed(1) : '---' }}
               </p>
+              <p v-if="tv.created_by">
+                Created by:
+                <nuxt-link
+                  v-for="person in tv.created_by"
+                  :key="person.id"
+                  :to="'/actor/' + person.id"
+                  >{{ person.name }}</nuxt-link
+                >
+              </p>
+              <p v-if="tv.first_air_date">
+                First air date: {{ tv.first_air_date }}
+              </p>
+              <div class="mt-3" v-if="tv.genres">
+                <strong>Genres:</strong>
+                <p v-for="genre in tv.genres" :key="genre.id">
+                  {{ genre.name }}
+                </p>
+              </div>
             </div>
           </div>
           <div class="w-2/3">
@@ -59,13 +77,6 @@
                 <h1 v-else class="text-4xl font-bold mb-2">
                   {{ tv.name }}
                 </h1>
-
-                <!-- 
-                  
-                  TODO: MAKE IT MORE DETAILED - DISPLAY EPISODE INFO
-                  
-                  {{ tv }} -->
-
                 <h4 v-if="tv.tagline" class="text-xl italic mb-4">
                   {{ tv.tagline }}
                 </h4>
