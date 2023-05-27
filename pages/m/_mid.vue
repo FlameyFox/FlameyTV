@@ -30,23 +30,8 @@
           class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
           <div class="w-1/3">
-            <img
-              v-if="movie.poster_path"
-              :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-              :alt="movie.title"
-              class="rounded-md w-full"
-            />
-            <img
-              class="bg-slate-900 rounded-md w-full"
-              v-else
-              src="@/assets/img/noPoster.png"
-              alt="No Poster"
-            />
-
-            <div class="bg-slate-800 rounded-lg p-5 mt-6">
-              <h3 class="text-2xl font-bold mb-3">Information</h3>
-              <MInformation :movie="movie"></MInformation>
-            </div>
+            <Poster :object="movie" mtype="movie"></Poster>
+            <MInformation :movie="movie"></MInformation>
             <div
               v-if="JSON.stringify(providers.results) != '{}'"
               class="bg-slate-800 rounded-lg p-5 mt-6"
@@ -56,21 +41,8 @@
             </div>
           </div>
           <div class="w-2/3 overflow-hidden">
-            <div class="flex gap-6">
-              <div class="bg-slate-800 rounded-lg p-5 w-full">
-                <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
-                <h4 class="text-xl italic mb-4">{{ movie.tagline }}</h4>
-                <hr class="border-slate-900 border-opacity-50 mb-4" />
-                <p>{{ movie.overview }}</p>
-              </div>
-            </div>
-
-            <div
-              class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll"
-            >
-              <h3 class="mb-4 text-xl font-bold">Cast</h3>
-              <MCast :cast="cast"></MCast>
-            </div>
+            <MTitle :movie="movie"></MTitle>
+            <MCast :cast="cast"></MCast>
           </div>
         </div>
       </div>

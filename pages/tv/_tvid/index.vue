@@ -20,18 +20,7 @@
           class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
           <div class="w-1/3">
-            <img
-              v-if="tv.poster_path"
-              :src="'https://image.tmdb.org/t/p/w500/' + tv.poster_path"
-              :alt="tv.name"
-              class="rounded-md"
-            />
-            <img
-              class="bg-slate-900 rounded-md"
-              v-else
-              src="@/assets/img/noPoster.png"
-              alt="No Poster"
-            />
+            <Poster :object="tv" mtype="tv"></Poster>
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="text-2xl mb-3 font-bold">Information</h3>
@@ -41,11 +30,11 @@
               </p>
               <p v-if="tv.created_by">
                 Created by:
-                <nuxt-link
+                <nuxt-link class="creator"
                   v-for="person in tv.created_by"
                   :key="person.id"
                   :to="'/actor/' + person.id"
-                  >{{ person.name }}</nuxt-link
+                  >{{ person.name }}<span class="sep" v-if="tv.created_by.length > 1">, </span></nuxt-link
                 >
               </p>
               <p v-if="tv.first_air_date">
@@ -210,5 +199,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+.creator:last-child .sep{
+  display: none;
 }
 </style>

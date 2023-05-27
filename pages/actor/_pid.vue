@@ -21,18 +21,7 @@
           class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
           <div class="w-1/3">
-            <img
-              v-if="person.profile_path"
-              :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path"
-              :alt="person.name"
-              class="rounded-md"
-            />
-            <img
-              class="bg-slate-900 rounded-md"
-              v-else
-              src="@/assets/img/noPoster.png"
-              alt="No Poster"
-            />
+            <Poster :object="person" mtype="person"></Poster>
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="text-2xl font-bold mb-3">Information</h3>
