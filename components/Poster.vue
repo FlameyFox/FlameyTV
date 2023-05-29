@@ -28,7 +28,7 @@
         alt="No Poster"
       />
       <div
-        class="absolute top-2 left-2 bg-slate-700 py-1 px-2 rounded-md text-sm"
+        class="absolute top-3 left-3 bg-slate-700 py-1 px-2 rounded-md text-sm"
         v-if="this.videos && this.fetching === false"
       >
         <a

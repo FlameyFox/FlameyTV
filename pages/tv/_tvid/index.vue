@@ -11,44 +11,18 @@
     </div>
     <div v-else>
       <div class="tv pb-5">
-        <!-- TODO: MAKE ALT BANNER PICTURE -->
         <div
           class="banner bg-cover bg-no-repeat bg-center relative h-96"
           :style="backdropImgPath"
         ></div>
         <div
-          class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
+          class="details w-11/12 xl:w-2/3 mx-auto p-6 flex flex-col xl:flex-row gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
-          <div class="w-1/3">
-            <Poster :object="tv" mtype="tv"></Poster>
-
-            <div class="bg-slate-800 rounded-lg p-5 mt-6">
-              <h3 class="text-2xl mb-3 font-bold">Information</h3>
-              <p>
-                Rating:
-                {{ tv.vote_average ? tv.vote_average.toFixed(1) : '---' }}
-              </p>
-              <p v-if="tv.created_by">
-                Created by:
-                <nuxt-link class="creator"
-                  v-for="person in tv.created_by"
-                  :key="person.id"
-                  :to="'/actor/' + person.id"
-                  >{{ person.name }}<span class="sep" v-if="tv.created_by.length > 1">, </span></nuxt-link
-                >
-              </p>
-              <p v-if="tv.first_air_date">
-                First air date: {{ tv.first_air_date }}
-              </p>
-              <div class="mt-3" v-if="tv.genres">
-                <strong>Genres:</strong>
-                <p v-for="genre in tv.genres" :key="genre.id">
-                  {{ genre.name }}
-                </p>
-              </div>
-            </div>
+          <div class="w-full gap-6 flex xl:block xl:w-1/3">
+            <Poster class="w-1/3 xl:w-full" :object="tv" mtype="tv"></Poster>
+            <Information class="w-2/3 xl:w-full" :object="tv"></Information>
           </div>
-          <div class="w-2/3">
+          <div class="w-full xl:w-2/3 overflow-hidden">
             <div class="flex gap-6">
               <div class="bg-slate-800 w-full rounded-lg p-5">
                 <h1
@@ -200,7 +174,7 @@ export default {
   top: 0;
   left: 0;
 }
-.creator:last-child .sep{
+.creator:last-child .sep {
   display: none;
 }
 </style>

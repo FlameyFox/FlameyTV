@@ -1,13 +1,3 @@
-<!--
-        
-        
-        TODO: 
-        
-        - MAKE ALT BANNER PICTURE
-        - Make cast function more useful and make subpage to see full cast
-        
-        -->
-
 <template>
   <div>
     <div v-if="loading">
@@ -27,20 +17,20 @@
           :style="backdropImgPath"
         ></div>
         <div
-          class="details w-2/3 mx-auto p-6 flex gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
+          class="details w-11/12 xl:w-2/3 mx-auto p-6 flex flex-col xl:flex-row gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
-          <div class="w-1/3">
-            <Poster :object="movie" mtype="movie"></Poster>
-            <MInformation :movie="movie"></MInformation>
+          <div class="w-full gap-6 flex xl:block xl:w-1/3">
+            <Poster class="w-1/3 xl:w-full" :object="movie" mtype="movie"></Poster>
+            <Information class="w-2/3 xl:w-full" :object="movie"></Information>
             <div
               v-if="JSON.stringify(providers.results) != '{}'"
-              class="bg-slate-800 rounded-lg p-5 mt-6"
+              class="bg-slate-800 rounded-lg p-5 mt-0 xl:mt-6 hidden xl:block"
             >
               <h3 class="mb-4 text-2xl font-bold">Providers</h3>
               <MProviders :providers="providers"></MProviders>
             </div>
           </div>
-          <div class="w-2/3 overflow-hidden">
+          <div class="w-full xl:w-2/3 overflow-hidden">
             <MTitle :movie="movie"></MTitle>
             <MCast :cast="cast"></MCast>
           </div>

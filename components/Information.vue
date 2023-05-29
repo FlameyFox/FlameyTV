@@ -1,39 +1,68 @@
 <template>
   <div>
-    <div class="bg-slate-800 rounded-lg p-5 mt-6">
-      <h3 class="text-2xl font-bold mb-3">Information</h3>
-      <p>Release date: {{ movie.release_date }}</p>
-      <p>
-        Rating:
-        {{ movie.vote_average ? movie.vote_average.toFixed(1) : '---' }}
+    <div class="bg-slate-800 h-full mt-0 xl:mt-6 relative rounded-lg p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="text-2xl font-bold">Information</h3>
+        <div
+          v-if="object.vote_average"
+          class="text-center h-full gap-2 flex justify-center items-end py-2 px-3 bg-slate-900 rounded-md"
+        >
+          <span class="text-lg">{{
+            object.vote_average ? object.vote_average.toFixed(1) : '---'
+          }}</span>
+          <span class="text-xs text-gray-500">/ 10 </span>
+        </div>
+      </div>
+      <p v-if="object.created_by && object.created_by.length > 0">
+        Created by:
+        <nuxt-link
+          class="creator"
+          v-for="person in object.created_by"
+          :key="person.id"
+          :to="'/actor/' + person.id"
+          >{{ person.name
+          }}<span class="sep" v-if="object.created_by.length > 1"
+            >,
+          </span></nuxt-link
+        >
       </p>
-      <p>
+      <p v-if="object.release_date">Release date: {{ object.release_date }}</p>
+      <p v-if="object.first_air_date">
+        First air date: {{ object.first_air_date }}
+      </p>
+      <p v-if="object.budget">
         Budget:
         {{
-          movie.budget != 0
+          object.budget != 0
             ? Intl.NumberFormat(`en-US`, {
                 currency: `USD`,
                 style: 'currency',
-              }).format(movie.budget)
+                maximumFractionDigits: 0,
+              }).format(object.budget)
             : '---'
         }}
       </p>
-      <p>
+      <p v-if="object.revenue">
         Revenue:
         {{
-          movie.revenue != 0
+          object.revenue != 0
             ? Intl.NumberFormat(`en-US`, {
                 currency: `USD`,
                 style: 'currency',
-              }).format(movie.revenue)
+                maximumFractionDigits: 0,
+              }).format(object.revenue)
             : '---'
         }}
       </p>
-      <p>Runtime: {{ convertTime(movie.runtime) }}</p>
-      <div class="mt-3" v-if="movie.genres">
+      <p v-if="object.runtime">Runtime: {{ convertTime(object.runtime) }}</p>
+      <div class="mt-3" v-if="object.genres">
         <h4 class="text-xl mb-1 font-bold">Genres</h4>
         <div class="flex gap-2 mb-5">
-          <span class="bg-slate-900 py-1 px-2 rounded-md text-sm" v-for="genre in movie.genres" :key="genre.id">
+          <span
+            class="bg-slate-900 flex items-center justify-center text-center py-1 px-2 rounded-md text-sm"
+            v-for="genre in object.genres"
+            :key="genre.id"
+          >
             {{ genre.name }}
           </span>
         </div>
@@ -42,7 +71,7 @@
         <a
           target="_blank"
           rel="noopener nofollow"
-          :href="'https://www.imdb.com/title/' + movie.imdb_id"
+          :href="'https://www.imdb.com/title/' + object.imdb_id"
           class="w-fit block mt-2"
           ><svg
             id="imdb_logo"
@@ -80,7 +109,7 @@
 
 <script>
 export default {
-  props: ['movie'],
+  props: ['object'],
 
   methods: {
     convertTime(num) {
