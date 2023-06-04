@@ -13,6 +13,18 @@
           <span class="text-xs text-gray-500">/ 10 </span>
         </div>
       </div>
+      <p v-if="object.known_for_department">
+        Known for: {{ object.known_for_department }}
+      </p>
+      <p v-if="object.birthday">
+        Birthday: {{ object.birthday }} ({{
+          calculateAge(object.birthday, new Date())
+        }}
+        years old)
+      </p>
+      <p v-if="object.place_of_birth">
+        Place of birth: {{ object.place_of_birth }}
+      </p>
       <p v-if="object.created_by && object.created_by.length > 0">
         Created by:
         <nuxt-link
@@ -30,6 +42,7 @@
       <p v-if="object.first_air_date">
         First air date: {{ object.first_air_date }}
       </p>
+      <p v-if="object.status">Show status: {{ object.status }}</p>
       <p v-if="object.budget">
         Budget:
         {{
@@ -71,7 +84,7 @@
         <a
           target="_blank"
           rel="noopener nofollow"
-          :href="'https://www.imdb.com/title/' + object.imdb_id"
+          :href="IMDBLink(object)"
           class="w-fit block mt-2"
           ><svg
             id="imdb_logo"
@@ -109,13 +122,67 @@
 
 <script>
 export default {
-  props: ['object'],
+  props: ['object', 'mtype'],
 
+  data() {
+    return {
+      extIdsTV: null,
+      fetching: false,
+    }
+  },
+  mounted() {
+    if (this.mtype === 'tv') {
+      this.getExternalIdsTV()
+    }
+  },
   methods: {
     convertTime(num) {
       var hours = Math.floor(num / 60)
       var minutes = num % 60
       return hours + 'h ' + minutes + 'm'
+    },
+    calculateAge(birthDate, otherDate) {
+      birthDate = new Date(birthDate)
+      otherDate = new Date(otherDate)
+
+      var years = otherDate.getFullYear() - birthDate.getFullYear()
+
+      if (
+        otherDate.getMonth() < birthDate.getMonth() ||
+        (otherDate.getMonth() == birthDate.getMonth() &&
+          otherDate.getDate() < birthDate.getDate())
+      ) {
+        years--
+      }
+
+      return years
+    },
+    IMDBLink() {
+      if (this.mtype === 'person') {
+        return 'https://www.imdb.com/name/' + this.object.imdb_id
+      } else if (this.mtype === 'movie') {
+        return 'https://www.imdb.com/title/' + this.object.imdb_id
+      } else if (this.mtype === 'tv') {
+        if (this.extIdsTV && this.fetching === false) {
+          return 'https://www.imdb.com/title/' + this.extIdsTV.imdb_id
+        }
+      } else {
+        return '#'
+      }
+    },
+    async getExternalIdsTV() {
+      this.fetching = true
+
+      const api = this.$config.tmdbAPI
+      const url =
+        'https://api.themoviedb.org/3/tv/' +
+        this.object.id +
+        '/external_ids?api_key=' +
+        api
+      const data = await this.$axios.$get(url)
+      console.log(data)
+      this.extIdsTV = data
+      this.fetching = false
     },
   },
 }

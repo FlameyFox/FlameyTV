@@ -66,7 +66,7 @@ export default {
   },
   mounted() {
     if (this.mtype === 'movie') {
-      this.videos = this.getVideos()
+      this.getVideos()
     }
   },
   methods: {
@@ -82,7 +82,6 @@ export default {
         api
 
       const data = await this.$axios.$get(url)
-      console.log(data)
       this.videos = data
       this.fetching = false
     },

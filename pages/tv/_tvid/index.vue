@@ -20,7 +20,11 @@
         >
           <div class="w-full gap-6 flex xl:block xl:w-1/3">
             <Poster class="w-1/3 xl:w-full" :object="tv" mtype="tv"></Poster>
-            <Information class="w-2/3 xl:w-full" :object="tv"></Information>
+            <Information
+              class="w-2/3 xl:w-full"
+              :object="tv"
+              mtype="tv"
+            ></Information>
           </div>
           <div class="w-full xl:w-2/3 overflow-hidden">
             <div class="flex gap-6">
