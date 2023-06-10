@@ -20,10 +20,10 @@
             v-if="episode.still_path"
             :src="'https://image.tmdb.org/t/p/w500/' + episode.still_path"
             :alt="episode.name"
-            class="rounded-md w-full"
+            class="rounded-md w-full aspect-video object-cover"
           />
           <img
-            class="bg-slate-900 rounded-md"
+            class="bg-slate-900 w-full rounded-md aspect-video object-cover"
             v-else
             src="@/assets/img/noPoster.png"
             alt="No Poster"
@@ -36,7 +36,7 @@
           <p class="text-sm mb-2">
             {{ episode.overview.replace(/(.{80})..+/, '$1&hellip;') }}
           </p>
-          <p class="text-sm">Air date: {{ episode.air_date }}</p>
+          <p class="text-sm">Air date: {{ episode.air_date ? episode.air_date : '---' }}</p>
           <p class="text-sm">
             Rating:
             {{ episode.vote_average ? episode.vote_average.toFixed(1) : '---' }}

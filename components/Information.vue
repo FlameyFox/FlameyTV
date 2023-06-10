@@ -42,7 +42,7 @@
       <p v-if="object.first_air_date">
         First air date: {{ object.first_air_date }}
       </p>
-      <p v-if="object.status">Show status: {{ object.status }}</p>
+      <p v-if="object.status && mtype === 'tv'">Show status: {{ object.status }}</p>
       <p v-if="object.budget">
         Budget:
         {{

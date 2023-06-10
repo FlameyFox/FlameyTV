@@ -30,6 +30,11 @@
               mtype="movie"
               :object="movie"
             ></Information>
+
+            <MCollection
+              v-if="movie.belongs_to_collection"
+              :movie="movie"
+            ></MCollection>
             <div
               v-if="JSON.stringify(providers.results) != '{}'"
               class="bg-slate-800 rounded-lg p-5 mt-0 xl:mt-6 hidden xl:block"

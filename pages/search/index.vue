@@ -4,7 +4,15 @@
       <h2 class="text-4xl font-black text-center">
         Search movies, TV shows, actors and more..
       </h2>
-      <div class="d-flex gap-2">
+      <input
+        class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
+        type="text"
+        v-model="query"
+        s
+        placeholder="Search..."
+      />
+
+      <div class="d-flex mt-2 gap-2">
         <input
           class="bg-slate-900 mb-1 align-middle border-4 d-inline border-slate-900 checked:bg-blue-400 appearance-none text-white p-1 rounded-sm transition-all text-center"
           v-model="adult"
@@ -14,13 +22,6 @@
         />
         <label class="d-inline-block" for="adult">Enable Adult (18+)</label>
       </div>
-      <input
-        class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
-        type="text"
-        v-model="query"
-        s
-        placeholder="Search..."
-      />
     </div>
 
     <div class="results mt-6">
@@ -65,14 +66,12 @@
           class="p-2 rounded-md text-center bg-slate-900 mt-6 mx-auto block"
           @click="getMore(currentMoviePage)"
         >
-          {{ loadingMoreMovies ? 'Fetching more...' : 'Load more' }}
+          {{ loadingMoreMovies ? 'Fetching more...' : 'See more results' }}
         </button>
       </div>
       <div v-else-if="query && query.length > 2">
-        <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
-        >
-          <p>No results...</p>
+        <div class="flex justify-center">
+          <p class="text-xl">No results for: {{ query }}</p>
         </div>
       </div>
     </div>

@@ -41,14 +41,16 @@ TODO: Make it easy to go between episodes in the same season and show.
 
             <div class="bg-slate-800 rounded-lg p-5 mt-6">
               <h3 class="text-2xl mb-3 font-bold">Information</h3>
-              <p>Air date: {{ episode.air_date }}</p>
+              <p>Air date: {{ episode.air_date ? episode.air_date : '---' }}</p>
               <p>
                 Rating:
                 {{
                   episode.vote_average ? episode.vote_average.toFixed(1) : '---'
                 }}
               </p>
-              <p>Runtime: {{ episode.runtime }} min</p>
+              <p>
+                Runtime: {{ episode.runtime ? episode.runtime : '---' }} min
+              </p>
             </div>
           </div>
           <div class="w-2/3">
