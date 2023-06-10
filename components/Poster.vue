@@ -34,8 +34,15 @@
         <a
           target="_blank"
           :href="'https://youtube.com/watch?v=' + this.videos.results[0].key"
+          v-if="this.videos.results.length > 0"
           >Watch Trailer</a
         >
+      </div>
+      <div
+        class="absolute top-3 left-3 bg-slate-700 py-1 px-2 rounded-md text-sm"
+        v-if="this.object.adult"
+      >
+        <span class="text-xl">18+</span>
       </div>
     </div>
     <div v-else-if="this.mtype === 'person'">

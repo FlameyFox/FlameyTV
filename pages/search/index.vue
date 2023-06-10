@@ -37,6 +37,7 @@
       </div>
       <div v-else-if="movies && movies.length > 1">
         <div
+          v-if="currentMoviePage < 3"
           class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
         >
           <!-- TODO: CHECK WHAT MOVIE TYPE IT IS -->
@@ -48,6 +49,24 @@
             :key="movie.id"
           />
         </div>
+        <div
+          v-else
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+        >
+          <MMovie
+            :movie="movie"
+            :loading="loading"
+            v-for="movie in movies"
+            :key="movie.id"
+            :mtype="movie.media_type"
+          />
+        </div>
+        <button
+          class="p-2 rounded-md text-center bg-slate-900 mt-6 mx-auto block"
+          @click="getMore(currentMoviePage)"
+        >
+          {{ loadingMoreMovies ? 'Fetching more...' : 'Load more' }}
+        </button>
       </div>
       <div v-else-if="query && query.length > 2">
         <div
@@ -70,6 +89,8 @@ export default {
       query: null,
       adult: false,
       mtype: 'tv',
+      currentMoviePage: 2,
+      loadingMoreMovies: false,
     }
   },
   watch: {
@@ -100,6 +121,27 @@ export default {
         return 0
       })
       this.loading = false
+    },
+    async getMore(pageId) {
+      const api = this.$config.tmdbAPI
+      this.loadingMoreMovies = true
+      var url =
+        'https://api.themoviedb.org/3/search/multi?query=' +
+        this.query +
+        '&api_key=' +
+        api +
+        '&page=' +
+        pageId
+      if (this.adult) {
+        url += '&include_adult=true'
+      }
+      const movies = await this.$axios.$get(url)
+      this.currentMoviePage++
+
+      movies.results.forEach((v) => {
+        this.movies.push(v)
+      })
+      this.loadingMoreMovies = false
     },
   },
 }
