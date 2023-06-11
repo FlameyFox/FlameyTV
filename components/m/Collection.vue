@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-6">
+  <div class="xl:mt-6">
     <nuxt-link
       :to="'/collection/' + movie.belongs_to_collection.id"
       :style="backdropImgPath"
