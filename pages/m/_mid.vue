@@ -4,11 +4,9 @@
       <div
         class="bg-slate-700 shadow rounded-md p-4 h-96 w-full mx-auto animate-pulse"
       ></div>
-
       <div
         class="details w-2/3 mx-auto p-6 flex gap-6 bg-opacity-40 mt-5 bg-slate-700 shadow rounded-lg h-96 animate-pulse"
       ></div>
-      Loading...
     </div>
     <div v-else>
       <div class="movie pb-5">
@@ -19,9 +17,9 @@
         <div
           class="details w-11/12 xl:w-2/3 mx-auto p-6 flex flex-col xl:flex-row gap-6 bg-slate-900 bg-opacity-40 mt-5 rounded-lg"
         >
-          <div class="w-full gap-6 flex flex-wrap  xl:block xl:w-1/3">
+          <div class="w-full gap-6 flex flex-wrap xl:block xl:w-1/3">
             <Poster
-              class="w-1/3 xl:w-full basis-1/3 "
+              class="w-1/3 xl:w-full basis-1/3"
               :object="movie"
               mtype="movie"
             ></Poster>
