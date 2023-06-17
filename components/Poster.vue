@@ -59,6 +59,20 @@
         alt="No Poster"
       />
     </div>
+    <div v-else-if="this.mtype === 'collection'">
+      <img
+        v-if="object.poster_path"
+        :src="'https://image.tmdb.org/t/p/w500/' + object.poster_path"
+        :alt="object.name"
+        class="rounded-md"
+      />
+      <img
+        class="bg-slate-900 rounded-md"
+        v-else
+        src="@/assets/img/noPoster.png"
+        alt="No Poster"
+      />
+    </div>
   </div>
 </template>
 

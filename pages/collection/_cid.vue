@@ -27,7 +27,41 @@
             ></Poster>
           </div>
           <div class="w-full xl:w-2/3 overflow-hidden">
-          Collections coming soon..
+            <MTitle :movie="movie"></MTitle>
+            <div v-if="movie.parts" class="seasons mt-3">
+              <h3 class="text-2xl mb-2 font-bold">Movies in collection</h3>
+              <div class="gap-3 grid grid-cols-2">
+                <nuxt-link
+                  class="bg-slate-800 p-4 rounded-md flex gap-3 flex-shrink-0 max-w-full"
+                  v-for="part in movie.parts"
+                  :key="part.id"
+                  :to="'/m/' + part.id"
+                >
+                  <div class="w-1/3">
+                    <img
+                      v-if="part.poster_path"
+                      :src="
+                        'https://image.tmdb.org/t/p/w500/' + part.poster_path
+                      "
+                      :alt="part.title"
+                      class="rounded-md w-full"
+                    />
+                    <img
+                      class="bg-slate-900 rounded-md"
+                      v-else
+                      src="@/assets/img/noPoster.png"
+                      alt="No Poster"
+                    />
+                  </div>
+                  <div class="w-2/3">
+                    <h3 class="text-xl mb-2 font-bold">{{ part.title }}</h3>
+                    <p class="text-sm mb-2">
+                      {{ part.overview.replace(/(.{100})..+/, '$1&hellip;') }}
+                    </p>
+                  </div>
+                </nuxt-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
