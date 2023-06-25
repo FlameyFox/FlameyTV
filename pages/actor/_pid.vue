@@ -26,7 +26,11 @@
               :object="person"
               mtype="person"
             ></Poster>
-            <Information mtype="person" class="w-2/3 xl:w-full" :object="person"></Information>
+            <Information
+              mtype="person"
+              class="w-2/3 xl:w-full"
+              :object="person"
+            ></Information>
           </div>
           <div class="w-full xl:w-2/3 overflow-hidden">
             <div class="flex gap-6">
@@ -103,6 +107,12 @@ export default {
       this.credits.sort((a, b) => b.vote_count - a.vote_count)
       // TODO: Maybe sort movies differently
 
+      if (credits && credits.cast.length > 1) {
+        this.backdropImgPath.backgroundImage =
+          'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' +
+          credits.cast[Math.floor(Math.random() * credits.cast.length)].backdrop_path +
+          ')'
+      }
       this.loading = false
     },
   },
