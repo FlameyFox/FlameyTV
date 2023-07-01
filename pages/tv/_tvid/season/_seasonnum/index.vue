@@ -51,7 +51,10 @@
                   :to="'/tv/' + this.$route.params.tvid"
                   >Go back to show</nuxt-link
                 >
-                <h1 class="mt-5 text-4xl font-bold mb-2">
+                <h1 v-if="!!this.tvname" class="mt-5 text-4xl font-bold mb-2">
+                  {{ this.tvname + ' – ' + season.name }}
+                </h1>
+                <h1 v-else class="mt-5 text-4xl font-bold mb-2">
                   {{ season.name }}
                 </h1>
                 <hr class="border-slate-900 border-opacity-50 mb-4" />
@@ -65,7 +68,11 @@
               <h3 class="mb-4 text-2xl font-bold">Cast</h3>
               <TvCast :cast="cast"></TvCast>
             </div>
-            <TvEpisodes v-if="season.episodes" :tv="tv" :season="season"></TvEpisodes>
+            <TvEpisodes
+              v-if="season.episodes"
+              :tv="tv"
+              :season="season"
+            ></TvEpisodes>
           </div>
         </div>
       </div>
@@ -84,6 +91,7 @@ export default {
         backgroundImage: '',
       },
       cast: [],
+      tvname: null,
     }
   },
   async created() {
@@ -101,6 +109,7 @@ export default {
     this.season = result
 
     this.getMovieCredits(this.$route.params.tvid)
+    this.getTVName()
 
     this.loading = false
   },
@@ -113,6 +122,18 @@ export default {
         'https://api.themoviedb.org/3/tv/' + ID + '/credits?api_key=' + api
       const credits = await this.$axios.$get(url)
       this.cast = credits.cast
+      this.loading = false
+    },
+    async getTVName() {
+      const api = this.$config.tmdbAPI
+      this.loading = true
+      const url =
+        'https://api.themoviedb.org/3/tv/' +
+        this.$route.params.tvid +
+        '?api_key=' +
+        api
+      const tv = await this.$axios.$get(url)
+      this.tvname = tv.name
       this.loading = false
     },
   },

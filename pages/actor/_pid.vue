@@ -110,7 +110,8 @@ export default {
       if (credits && credits.cast.length > 1) {
         this.backdropImgPath.backgroundImage =
           'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' +
-          credits.cast[Math.floor(Math.random() * credits.cast.length)].backdrop_path +
+          credits.cast[Math.floor(Math.random() * credits.cast.length)]
+            .backdrop_path +
           ')'
       }
       this.loading = false
