@@ -3,7 +3,7 @@
     <div class="bg-slate-800 rounded-lg p-5 scrollbar mt-6 overflow-x-scroll">
       <h3 class="mb-4 text-xl font-bold">Cast</h3>
       <div class="flex gap-3 min-w-fit">
-        <div v-for="member in cast.slice(0, 12)" :key="member.id" class="w-36">
+        <div v-for="member in sortByPopularity(cast.slice(0, 12))" :key="member.id" class="w-36">
           <nuxt-link
             :to="'/actor/' + member.id"
             class="flex flex-col gap-4 hover:bg-slate-700 bg-opacity-10 p-2 rounded-lg transition-all"
@@ -41,7 +41,7 @@
         </button>
         <div v-if="seeAllActors" class="flex gap-3 min-w-fit">
           <div
-            v-for="member in cast.slice(12, 999)"
+            v-for="member in sortByPopularity(cast.slice(12, 999))"
             :key="member.id"
             class="w-36"
           >
@@ -85,6 +85,11 @@ export default {
     return {
       seeAllActors: false,
     }
+  },
+  methods: {
+    sortByPopularity(array) {
+      return array.sort((a, b) => b.popularity - a.popularity)
+    },
   },
 }
 </script>
