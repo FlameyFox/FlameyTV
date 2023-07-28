@@ -1,6 +1,5 @@
 # FlameyTV
 
-## **CURRENTLY IN THE PROCESS OF MIGRATING TO NUXT3! 🏔️💚**
 
 Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 
