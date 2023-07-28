@@ -1,10 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: ["~/assets/css/main.css"],
-  plugins: [{ src: "~/plugins/vercel.js", mode: "client" }],
+  css: ['~/assets/css/main.css'],
+  plugins: [{ src: '~/plugins/vercel.js', mode: 'client' }],
   runtimeConfig: {
-    tmdbAPI: process.env.TMDB_API,
+    public: {
+      tmdbAPI: process.env.TMDB_API,
+    },
   },
-  modules: ["@nuxtjs/tailwindcss"],
-});
+  modules: ['@nuxtjs/tailwindcss'],
+})
