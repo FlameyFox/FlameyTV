@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module.exports = {
   theme: {
     extend: {
@@ -26,3 +27,6 @@ module.exports = {
   },
   plugins: [],
 }
+=======
+// NOTHING
+>>>>>>> cd927d0 (nuxt3)

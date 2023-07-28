@@ -1,11 +1,21 @@
 # FlameyTV
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd927d0 (nuxt3)
 Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 
 [See it in action](https://flamey-tv.vercel.app/)
 
 
+<<<<<<< HEAD
+=======
+TODO:
+
+- Add user accounts
+- Make better transitions
+>>>>>>> cd927d0 (nuxt3)
 
 
 
@@ -14,8 +24,11 @@ If you have any suggestions or feedback, feel free to reach out to me. And if yo
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> cd927d0 (nuxt3)
 ## Build Setup
 
 ```bash

@@ -61,7 +61,11 @@ export default {
     const url =
       'https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&&vote_count.gte=250&api_key=' +
       api
+<<<<<<< HEAD
     const movies = await this.$axios.$get(url)
+=======
+    const movies = await $fetch(url)
+>>>>>>> cd927d0 (nuxt3)
     this.movies = movies.results
     this.loading = false
   },
@@ -75,7 +79,11 @@ export default {
         api +
         '&page=' +
         pageId
+<<<<<<< HEAD
       const movies = await this.$axios.$get(url)
+=======
+      const movies = await $fetch(url)
+>>>>>>> cd927d0 (nuxt3)
       console.log(movies.results)
       this.correntShowPage++
 

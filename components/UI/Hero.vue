@@ -5,8 +5,12 @@
       <div
         class="h-full hero relative bg-cover bg-no-repeat bg-center"
         :style="backdropImgPath"
+<<<<<<< HEAD
         v-else-if="movies"
       >
+=======
+        v-else-if="movies">
+>>>>>>> cd927d0 (nuxt3)
         <nuxt-link
           class="absolute top-1 left-1 opacity-60 hover:opacity-100 transition-all"
           :to="'/m/' + movies[this.number].id"
@@ -25,6 +29,7 @@ export default {
       loading: false,
       number: 0,
       backdropImgPath: {
+<<<<<<< HEAD
         backgroundImage: '',
       },
     }
@@ -44,11 +49,36 @@ export default {
     this.loading = false
   },
 }
+=======
+        backgroundImage: "",
+      },
+    };
+  },
+  async created() {
+    const api = await $fetch('/api/tmdb');
+    this.loading = true;
+    const url = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + api.tmdbAPI;
+    const movies = await $fetch(url);
+    this.movies = movies.results;
+    this.number = Math.floor(Math.random() * 20);
+
+    this.backdropImgPath.backgroundImage =
+      "url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/" +
+      this.movies[this.number].backdrop_path +
+      ")";
+    this.loading = false;
+  },
+};
+>>>>>>> cd927d0 (nuxt3)
 </script>
 
 <style scoped>
 .hero:before {
+<<<<<<< HEAD
   content: '';
+=======
+  content: "";
+>>>>>>> cd927d0 (nuxt3)
   background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;

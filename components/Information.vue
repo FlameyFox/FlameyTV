@@ -1,14 +1,24 @@
 <template>
   <div>
+<<<<<<< HEAD
     <div class="bg-slate-800 h-full mt-0 xl:mt-6 relative rounded-lg p-5">
+=======
+    <div v-if="object" class="bg-slate-800 h-full mt-0 xl:mt-6 relative rounded-lg p-5">
+>>>>>>> cd927d0 (nuxt3)
       <div class="flex justify-between items-center mb-3">
         <h3 class="text-2xl font-bold">Information</h3>
         <div
           v-if="object.vote_average"
+<<<<<<< HEAD
           class="text-center h-full gap-2 flex justify-center items-end py-2 px-3 bg-slate-900 rounded-md"
         >
           <span class="text-lg">{{
             object.vote_average ? object.vote_average.toFixed(1) : '---'
+=======
+          class="text-center h-full gap-2 flex justify-center items-end py-2 px-3 bg-slate-900 rounded-md">
+          <span class="text-lg">{{
+            object.vote_average ? object.vote_average.toFixed(1) : "---"
+>>>>>>> cd927d0 (nuxt3)
           }}</span>
           <span class="text-xs text-gray-500">/ 10 </span>
         </div>
@@ -42,17 +52,30 @@
       <p v-if="object.first_air_date">
         First air date: {{ object.first_air_date }}
       </p>
+<<<<<<< HEAD
       <p v-if="object.status && mtype === 'tv'">Show status: {{ object.status }}</p>
+=======
+      <p v-if="object.status && mtype === 'tv'">
+        Show status: {{ object.status }}
+      </p>
+>>>>>>> cd927d0 (nuxt3)
       <p v-if="object.budget">
         Budget:
         {{
           object.budget != 0
             ? Intl.NumberFormat(`en-US`, {
                 currency: `USD`,
+<<<<<<< HEAD
                 style: 'currency',
                 maximumFractionDigits: 0,
               }).format(object.budget)
             : '---'
+=======
+                style: "currency",
+                maximumFractionDigits: 0,
+              }).format(object.budget)
+            : "---"
+>>>>>>> cd927d0 (nuxt3)
         }}
       </p>
       <p v-if="object.revenue">
@@ -61,10 +84,17 @@
           object.revenue != 0
             ? Intl.NumberFormat(`en-US`, {
                 currency: `USD`,
+<<<<<<< HEAD
                 style: 'currency',
                 maximumFractionDigits: 0,
               }).format(object.revenue)
             : '---'
+=======
+                style: "currency",
+                maximumFractionDigits: 0,
+              }).format(object.revenue)
+            : "---"
+>>>>>>> cd927d0 (nuxt3)
         }}
       </p>
       <p v-if="object.runtime">Runtime: {{ convertTime(object.runtime) }}</p>
@@ -74,8 +104,12 @@
           <span
             class="bg-slate-900 flex items-center justify-center text-center py-1 px-2 rounded-md text-sm"
             v-for="genre in object.genres"
+<<<<<<< HEAD
             :key="genre.id"
           >
+=======
+            :key="genre.id">
+>>>>>>> cd927d0 (nuxt3)
             {{ genre.name }}
           </span>
         </div>
@@ -93,14 +127,19 @@
             width="64"
             height="32"
             viewBox="0 0 64 32"
+<<<<<<< HEAD
             version="1.1"
           >
+=======
+            version="1.1">
+>>>>>>> cd927d0 (nuxt3)
             <g fill="#F5C518">
               <rect x="0" y="0" width="100%" height="100%" rx="4"></rect>
             </g>
             <g
               transform="translate(8.000000, 7.000000)"
               fill="#000000"
+<<<<<<< HEAD
               fill-rule="nonzero"
             >
               <polygon points="0 18 5 18 5 0 0 0"></polygon>
@@ -113,6 +152,16 @@
               <path
                 d="M44.4299079,4.50685823 L44.749518,4.50685823 C46.5447098,4.50685823 48,5.91267586 48,7.64486762 L48,14.8619906 C48,16.5950653 46.5451816,18 44.749518,18 L44.4299079,18 C43.3314617,18 42.3602746,17.4736618 41.7718697,16.6682739 L41.4838962,17.7687785 L37,17.7687785 L37,0 L41.7843263,0 L41.7843263,5.78053556 C42.4024982,5.01015739 43.3551514,4.50685823 44.4299079,4.50685823 Z M43.4055679,13.2842155 L43.4055679,9.01907814 C43.4055679,8.31433946 43.3603268,7.85185468 43.2660746,7.63896485 C43.1718224,7.42607505 42.7955881,7.2893916 42.5316822,7.2893916 C42.267776,7.2893916 41.8607934,7.40047379 41.7816216,7.58767002 L41.7816216,9.01907814 L41.7816216,13.4207851 L41.7816216,14.8074788 C41.8721037,15.0130276 42.2602358,15.1274059 42.5316822,15.1274059 C42.8031285,15.1274059 43.1982131,15.0166981 43.281155,14.8074788 C43.3640968,14.5982595 43.4055679,14.0880581 43.4055679,13.2842155 Z"
               ></path>
+=======
+              fill-rule="nonzero">
+              <polygon points="0 18 5 18 5 0 0 0"></polygon>
+              <path
+                d="M15.6725178,0 L14.5534833,8.40846934 L13.8582008,3.83502426 C13.65661,2.37009263 13.4632474,1.09175121 13.278113,0 L7,0 L7,18 L11.2416347,18 L11.2580911,6.11380679 L13.0436094,18 L16.0633571,18 L17.7583653,5.8517865 L17.7707076,18 L22,18 L22,0 L15.6725178,0 Z"></path>
+              <path
+                d="M24,18 L24,0 L31.8045586,0 C33.5693522,0 35,1.41994415 35,3.17660424 L35,14.8233958 C35,16.5777858 33.5716617,18 31.8045586,18 L24,18 Z M29.8322479,3.2395236 C29.6339219,3.13233348 29.2545158,3.08072342 28.7026524,3.08072342 L28.7026524,14.8914865 C29.4312846,14.8914865 29.8796736,14.7604764 30.0478195,14.4865461 C30.2159654,14.2165858 30.3021941,13.486105 30.3021941,12.2871637 L30.3021941,5.3078959 C30.3021941,4.49404499 30.272014,3.97397442 30.2159654,3.74371416 C30.1599168,3.5134539 30.0348852,3.34671372 29.8322479,3.2395236 Z"></path>
+              <path
+                d="M44.4299079,4.50685823 L44.749518,4.50685823 C46.5447098,4.50685823 48,5.91267586 48,7.64486762 L48,14.8619906 C48,16.5950653 46.5451816,18 44.749518,18 L44.4299079,18 C43.3314617,18 42.3602746,17.4736618 41.7718697,16.6682739 L41.4838962,17.7687785 L37,17.7687785 L37,0 L41.7843263,0 L41.7843263,5.78053556 C42.4024982,5.01015739 43.3551514,4.50685823 44.4299079,4.50685823 Z M43.4055679,13.2842155 L43.4055679,9.01907814 C43.4055679,8.31433946 43.3603268,7.85185468 43.2660746,7.63896485 C43.1718224,7.42607505 42.7955881,7.2893916 42.5316822,7.2893916 C42.267776,7.2893916 41.8607934,7.40047379 41.7816216,7.58767002 L41.7816216,9.01907814 L41.7816216,13.4207851 L41.7816216,14.8074788 C41.8721037,15.0130276 42.2602358,15.1274059 42.5316822,15.1274059 C42.8031285,15.1274059 43.1982131,15.0166981 43.281155,14.8074788 C43.3640968,14.5982595 43.4055679,14.0880581 43.4055679,13.2842155 Z"></path>
+>>>>>>> cd927d0 (nuxt3)
             </g></svg
         ></a>
       </p>
@@ -122,21 +171,34 @@
 
 <script>
 export default {
+<<<<<<< HEAD
   props: ['object', 'mtype'],
+=======
+  props: ["object", "mtype"],
+>>>>>>> cd927d0 (nuxt3)
 
   data() {
     return {
       extIdsTV: null,
       fetching: false,
+<<<<<<< HEAD
     }
   },
   mounted() {
     if (this.mtype === 'tv') {
       this.getExternalIdsTV()
+=======
+    };
+  },
+  mounted() {
+    if (this.mtype === "tv") {
+      this.getExternalIdsTV();
+>>>>>>> cd927d0 (nuxt3)
     }
   },
   methods: {
     convertTime(num) {
+<<<<<<< HEAD
       var hours = Math.floor(num / 60)
       var minutes = num % 60
       return hours + 'h ' + minutes + 'm'
@@ -146,12 +208,24 @@ export default {
       otherDate = new Date(otherDate)
 
       var years = otherDate.getFullYear() - birthDate.getFullYear()
+=======
+      var hours = Math.floor(num / 60);
+      var minutes = num % 60;
+      return hours + "h " + minutes + "m";
+    },
+    calculateAge(birthDate, otherDate) {
+      birthDate = new Date(birthDate);
+      otherDate = new Date(otherDate);
+
+      var years = otherDate.getFullYear() - birthDate.getFullYear();
+>>>>>>> cd927d0 (nuxt3)
 
       if (
         otherDate.getMonth() < birthDate.getMonth() ||
         (otherDate.getMonth() == birthDate.getMonth() &&
           otherDate.getDate() < birthDate.getDate())
       ) {
+<<<<<<< HEAD
         years--
       }
 
@@ -186,4 +260,40 @@ export default {
     },
   },
 }
+=======
+        years--;
+      }
+
+      return years;
+    },
+    IMDBLink() {
+      if (this.mtype === "person") {
+        return "https://www.imdb.com/name/" + this.object.imdb_id;
+      } else if (this.mtype === "movie") {
+        return "https://www.imdb.com/title/" + this.object.imdb_id;
+      } else if (this.mtype === "tv") {
+        if (this.extIdsTV && this.fetching === false) {
+          return "https://www.imdb.com/title/" + this.extIdsTV.imdb_id;
+        }
+      } else {
+        return "#";
+      }
+    },
+    async getExternalIdsTV() {
+      this.fetching = true;
+
+      const api = await $fetch("/api/tmdb");
+      const url =
+        "https://api.themoviedb.org/3/tv/" +
+        this.object.id +
+        "/external_ids?api_key=" +
+        api.tmdbAPI;
+      const data = await $fetch(url);
+      console.log(data);
+      this.extIdsTV = data;
+      this.fetching = false;
+    },
+  },
+};
+>>>>>>> cd927d0 (nuxt3)
 </script>
