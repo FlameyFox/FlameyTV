@@ -7,7 +7,7 @@ Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 
 TODO:
 
-- Add user accounts
+- Fix "flicker" issue
 - Make better transitions
 
 
