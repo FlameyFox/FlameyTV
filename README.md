@@ -7,8 +7,8 @@ Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 
 TODO:
 
-- Fix "flicker" issue
-- Make better transitions
+- [ ] Fix "flicker" issue
+- [ ] Make better transitions
 
 
 
