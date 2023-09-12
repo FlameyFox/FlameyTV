@@ -9,6 +9,8 @@ TODO:
 
 - [ ] Fix "flicker" issue
 - [ ] Make better transitions
+- [ ] Better trailer/video handling
+- [ ] More indepth Actor/Person pages
 
 
 
