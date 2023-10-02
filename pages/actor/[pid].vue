@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       person: null,
-      loading: false,
+      loading: true,
       showMore: false,
       backdropImgPath: {
         backgroundImage: "",
@@ -89,7 +89,6 @@ export default {
   methods: {
     async getPersonMovieCredits() {
       const api = await $fetch("/api/tmdb");
-      this.loading = true;
       const url =
         "https://api.themoviedb.org/3/person/" +
         this.$route.params.pid +
@@ -107,7 +106,6 @@ export default {
             .backdrop_path +
           ")";
       }
-      this.loading = false;
     },
   },
 };

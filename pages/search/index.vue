@@ -8,16 +8,16 @@
         class="bg-slate-900 mt-4 text-white p-2 rounded-lg transition-all text-center w-3/12"
         type="text"
         v-model="query"
-        s
-        placeholder="Search..." />
-
+        placeholder="Search..."
+      />
       <div class="d-flex mt-2 gap-2">
         <input
           class="bg-slate-900 mb-1 align-middle border-4 d-inline border-slate-900 checked:bg-blue-400 appearance-none text-white p-1 rounded-sm transition-all text-center"
           v-model="adult"
           name="adult"
           type="checkbox"
-          id="adult" />
+          id="adult"
+        />
         <label class="d-inline-block" for="adult">Enable Adult (18+)</label>
       </div>
     </div>
@@ -25,39 +25,22 @@
     <div class="results mt-6">
       <div v-if="loading">
         <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6"
+        >
           <div
             class="bg-slate-700 shadow rounded-md p-4 max-w-sm w-full mx-auto animate-pulse"
             v-for="num in 6"
-            :key="num"></div>
+            :key="num"
+          ></div>
         </div>
       </div>
       <div v-else-if="movies && movies.length > 1">
-        <div
-          v-if="currentMoviePage < 3"
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
-          <!-- TODO: CHECK WHAT MOVIE TYPE IT IS -->
-          <MMovie
-            :movie="movie"
-            :mtype="movie.media_type"
-            :loading="loading"
-            v-for="movie in movies.slice(0, 18)"
-            :key="movie.id" />
-        </div>
-        <div
-          v-else
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
-          <MMovie
-            :movie="movie"
-            :loading="loading"
-            v-for="movie in movies"
-            :key="movie.id"
-            :mtype="movie.media_type" />
-        </div>
+        <SearchMovieGrid :movies="visibleMovies" />
         <button
           class="p-2 rounded-md text-center bg-slate-900 mt-6 mx-auto block"
-          @click="getMore(currentMoviePage)">
-          {{ loadingMoreMovies ? "Fetching more..." : "See more results" }}
+          @click="getMore(currentMoviePage)"
+        >
+          {{ loadingMoreMovies ? 'Fetching more...' : 'See more results' }}
         </button>
       </div>
       <div v-else-if="query && query.length > 2">
@@ -70,6 +53,8 @@
 </template>
 
 <script>
+const BASE_URL = 'https://api.themoviedb.org/3/search/multi'
+
 export default {
   data() {
     return {
@@ -78,61 +63,47 @@ export default {
       showMore: false,
       query: null,
       adult: false,
-      mtype: "tv",
+      mtype: 'tv',
       currentMoviePage: 2,
       loadingMoreMovies: false,
-    };
+    }
+  },
+  computed: {
+    visibleMovies() {
+      return this.currentMoviePage < 3 ? this.movies.slice(0, 18) : this.movies
+    },
   },
   watch: {
     query(query) {
       if (query.length > 2) {
-        this.search();
+        this.search()
       }
     },
   },
   methods: {
-    async search() {
-      const api = await $fetch("/api/tmdb");
-      this.loading = true;
-      var url =
-        "https://api.themoviedb.org/3/search/multi?query=" +
-        this.query +
-        "&api_key=" +
-        api.tmdbAPI;
-      if (this.adult) {
-        url += "&include_adult=true";
-      }
-
-      const results = await $fetch(url);
-      this.movies = results.results;
-      this.movies.sort((a, b) => {
-        if (a.vote_count > b.vote_count) return -1;
-        if (a.vote_count < b.vote_count) return 1;
-        return 0;
-      });
-      this.loading = false;
+    async fetchApi(url) {
+      const api = await $fetch('/api/tmdb')
+      return $fetch(`${url}&api_key=${api.tmdbAPI}`)
     },
-    async getMore(pageId) {
-      const api = await $fetch("/api/tmdb");
-      this.loadingMoreMovies = true;
-      var url =
-        "https://api.themoviedb.org/3/search/multi?query=" +
-        this.query +
-        "&api_key=" +
-        api.tmdbAPI +
-        "&page=" +
-        pageId;
-      if (this.adult) {
-        url += "&include_adult=true";
-      }
-      const movies = await $fetch(url);
-      this.currentMoviePage++;
-
-      movies.results.forEach((v) => {
-        this.movies.push(v);
-      });
-      this.loadingMoreMovies = false;
+    async search() {
+      this.loading = true
+      const url = `${BASE_URL}?query=${this.query}${
+        this.adult ? '&include_adult=true' : ''
+      }`
+      const results = await this.fetchApi(url)
+      this.movies = results.results.sort((a, b) => b.vote_count - a.vote_count)
+      this.loading = false
+    },
+    async getMore() {
+      this.loadingMoreMovies = true
+      const url = `${BASE_URL}?query=${this.query}&page=${
+        this.currentMoviePage
+      }${this.adult ? '&include_adult=true' : ''}`
+      const movies = await this.fetchApi(url)
+      this.currentMoviePage++
+      this.movies.push(...movies.results)
+      this.loadingMoreMovies = false
     },
   },
-};
+}
 </script>

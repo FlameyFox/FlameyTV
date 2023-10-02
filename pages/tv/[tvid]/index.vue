@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       tv: null,
-      loading: false,
+      loading: true,
       showMore: false,
       backdropImgPath: {
         backgroundImage: "",
@@ -135,7 +135,6 @@ export default {
   methods: {
     async getMovieCredits(ID) {
       const api = await $fetch("/api/tmdb");
-      this.loading = true;
       const url =
         "https://api.themoviedb.org/3/tv/" +
         ID +
@@ -144,16 +143,13 @@ export default {
       const credits = await $fetch(url);
       this.cast = credits.cast;
       this.crew = credits.crew;
-      this.loading = false;
     },
     async getTVSeasons(ID, seasonNum) {
       const api = await $fetch("/api/tmdb");
-      this.loading = true;
       const url =
         "https://api.themoviedb.org/3/tv/" + ID + "/season/" + seasonNum;
       const season = await $fetch(url);
       this.season = season;
-      this.loading = false;
     },
   },
 };

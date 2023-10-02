@@ -4,9 +4,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   plugins: [{ src: '~/plugins/vercel.js', mode: 'client' }],
   runtimeConfig: {
-    public: {
-      tmdbAPI: process.env.TMDB_API,
-    },
+    tmdbAPI: process.env.TMDB_API,
   },
   modules: ['@nuxtjs/tailwindcss'],
 })

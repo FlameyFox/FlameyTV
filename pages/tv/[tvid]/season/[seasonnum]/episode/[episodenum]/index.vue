@@ -92,7 +92,7 @@ export default {
       season: null,
       tv: null,
       episode: null,
-      loading: false,
+      loading: true,
       backdropImgPath: {
         backgroundImage: "",
       },
@@ -125,7 +125,6 @@ export default {
   methods: {
     async getMovieCredits(ID) {
       const api = await $fetch("/api/tmdb");
-      this.loading = true;
       const url =
         "https://api.themoviedb.org/3/tv/" +
         ID +
@@ -133,7 +132,6 @@ export default {
         api.tmdbAPI;
       const credits = await $fetch(url);
       this.cast = credits.cast;
-      this.loading = false;
     },
   },
 };
