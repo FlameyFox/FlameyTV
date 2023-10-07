@@ -7,4 +7,14 @@ export default defineNuxtConfig({
     tmdbAPI: process.env.TMDB_API,
   },
   modules: ['@nuxtjs/tailwindcss'],
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Nunito&display=swap',
+        },
+      ],
+    },
+  },
 })

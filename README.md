@@ -7,10 +7,10 @@ Build with NuxtJS, TailwindCSS and using the [TMDB api](https://themoviedb.org).
 
 TODO:
 
-- [x] Fix "flicker" issue
 - [ ] Make better transitions
 - [ ] Better trailer/video handling
 - [ ] More indepth Actor/Person pages
+- [ ] More indepth show and episode info
 
 
 
